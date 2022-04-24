@@ -7,6 +7,7 @@ namespace JMR.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    public static List<Post> posts = new List<Post>();
 
     public HomeController(ILogger<HomeController> logger)
     {
@@ -15,12 +16,17 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        using (var context = new BloggingContext())
+        {
+            ViewBag.Posts = context.Posts.ToList();
+        }
         return View();
     }
 
-    public IActionResult Privacy()
+    public IActionResult Posts(Post post)
     {
-        return View();
+        posts.Add(post);
+        return RedirectToAction("Index");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
