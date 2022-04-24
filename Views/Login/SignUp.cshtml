@@ -1,0 +1,70 @@
+﻿<div class="split1 left">
+  <div class="centered">
+    <h1>Signup</h1>
+    <p>Signup with your data.</p>
+    <form action="">
+        <label for="email">Email</label></br>
+        <input type="email" id="email" name="email" placeholder="name@example.com"></br>
+        <label for="Password">Password</label></br>
+        <input type="password" id="Password" name="Password" placeholder="min. 8 characters"></br>
+        <label for="ConfirmPassword">Confirm Password</label></br>
+        <input type="password" id="ConfirmPassword" name="ConfirmPassword" placeholder="min. 8 characters"></br>
+        <label for="First Name">First Name</label></br>
+        <input type="text" id="First Name" name="First Name" placeholder="John"></br>
+        <label for="Last Name">Last Name</label></br>
+        <input type="Last Name" id="Last Name" name="Last Name" placeholder="Doe"></br>
+        <label for="Date">Birth Date</label></br>
+        <input type="Date" id="Date" name="Date" placeholder="Doe"></br>
+    </form>
+  </div>
+</div>
+
+<div class="split2 right">
+  <div class="centered">
+    <img src="img_avatar.png" alt="Avatar man">
+    <h2>John Doe</h2>
+    <p>Some text here too.</p>
+  </div>
+</div>
+
+<style>
+    .split1 {
+  height: 100%;
+  width: 40%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.split2 {
+  height: 100%;
+  width: 60%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+  left: 0;
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+  background-color: #59AC89;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+</style>
