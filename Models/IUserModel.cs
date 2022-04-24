@@ -2,19 +2,16 @@ using System.ComponentModel.DataAnnotations;
 
 namespace JMR.Models;
 
-public interface IUser
+public class IUser
 {
   [Key]
-  [Required]
-  public int userId;
+  public int userId {get;set;}
 
-  [Required]
-  public string FName;
 
-  [Required]
-  public string LName;
+  public string? FName {get;set;}
 
-  [Required]
+  public string? LName{get;set;}
+
   [Range(1970, 2004)]
-  public int birthYear;
+  public int birthYear{get;set;}
 }
