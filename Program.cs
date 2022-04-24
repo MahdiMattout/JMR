@@ -15,9 +15,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 var db = new BloggingContext();
-Console.WriteLine($"Database path: {db.DbPath}.");
-db.Add(new IUser{ userId = 1 });
-db.SaveChanges();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

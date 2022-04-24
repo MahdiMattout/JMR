@@ -14,4 +14,7 @@ public class IUser
 
   [Range(1970, 2004)]
   public int birthYear{get;set;}
+  public string getUserInitials(){
+    return FName[0].ToString().ToUpper() + LName[0].ToString().ToUpper();
+  }
 }
