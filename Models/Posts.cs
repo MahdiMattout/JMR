@@ -9,16 +9,14 @@ public class Post
 
   public string? Description { get; set; }
 
-  [ForeignKey("RequiredSkillsId")]
-  public int RequiredSkillsId { get; set; }
   public int minPay { get; set; }
   public int maxPay { get; set; }
   public string priceRange(){
     return minPay.ToString() + " - " + maxPay.ToString() + "$";
   }
-  // public List<string> GetRequiredSkills(){
-  //   using (var context = new BloggingContext()){
-  //     return context.PostRequiredSkills.Single(RS => RS.Id == RequiredSkillsId).RequiredSkillsList;
-  //   }
-  // }
+  public List<RequiredSkills> GetRequiredSkills(){
+    using (var db = new BloggingContext()){
+      return db.RequiredSkills.Where(RS => RS.userId == postId).ToList();
+    }
+  }
 }

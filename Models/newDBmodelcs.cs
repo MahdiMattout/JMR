@@ -8,7 +8,7 @@ public class BloggingContext : DbContext
 {
     public DbSet<IUser>? Users { get; set; }
     public DbSet<Post>? Posts { get; set; }
-    // public DbSet<RequiredSkills>? PostRequiredSkills { get; set; }
+    public DbSet<RequiredSkills>? RequiredSkills { get; set; }
   public string? DbPath { get; }
 
     public BloggingContext()
