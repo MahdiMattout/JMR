@@ -1,12 +1,15 @@
 using JMR.Models;
-
+using JMR.helpers;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
-
+var salt = Hashing.generateSalt();
+string password = "rony";
+var hash = Hashing.generateHash(salt, password);
+string saltstring = Convert.ToBase64String(salt);
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -14,10 +17,6 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-var db = new BloggingContext();
-Console.WriteLine($"Database path: {db.DbPath}.");
-db.Add(new IUser{ userId = 1 });
-db.SaveChanges();
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 

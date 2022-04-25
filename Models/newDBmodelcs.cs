@@ -7,6 +7,7 @@ namespace JMR.Models;
 public class BloggingContext : DbContext
 {
     public DbSet<IUser>? Users { get; set; }
+    public DbSet<Credentials>? credentials { get; set; }
     public string? DbPath { get; }
 
     public BloggingContext()
