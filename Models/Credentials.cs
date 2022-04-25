@@ -13,10 +13,13 @@ namespace JMR.Models
         public string? Email{get;set;}
 
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id{get;set;}
 
         [Required]
-        public string? password{get; set;}
+        public string? Hashedpassword{get; set;}
+        [Required]
+        public string? passwordSalt{get;set;}
     }
 }
 

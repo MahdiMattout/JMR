@@ -1,0 +1,66 @@
+@model LoginViewModel
+<div class="split1 left">
+  <div class="centered">
+    <h1>Signup</h1>
+    <p>Signup with your data.</p>
+    <form asp-action="submitLogin" method="post">
+        <label asp-for="Email">Email</label></br>
+        <input asp-for="Email" type="email" id="Email" name="Email" placeholder="name@example.com"></br>
+        <label asp-for="Password">Password</label></br>
+        <input asp-for="Password" type="password" id="Password" name="Password" placeholder="min. 8 characters"></br>
+        <div>
+        <input type="submit" asp-action="submitLogin" value="Add" class="btn btn-primary submit" />
+        </div>
+    </form>
+  </div>
+</div>
+
+<div class="split2 right">
+  <div class="centered">
+    <img src="img_avatar.png" alt="Avatar man">
+    <h2>John Doe</h2>
+    <p>Some text here too.</p>
+  </div>
+</div>
+
+<style>
+    .split1 {
+  height: 100%;
+  width: 40%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.split2 {
+  height: 100%;
+  width: 60%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+/* Control the left side */
+.left {
+  left: 0;
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+  background-color: #59AC89;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+</style>
