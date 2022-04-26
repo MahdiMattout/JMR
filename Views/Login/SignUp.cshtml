@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="~/css/custom.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
 </head>
 <div class="split1 left">
   <div class="centered">
@@ -18,11 +19,11 @@
         <input asp-for="Email" class="form-control" type="email" id="Email" name="Email"
           placeholder="name@example.com"></br>
         <label class="form-label" asp-for="Password">Password</label></br>
-        <input class="form-control" asp-for="Password" type="password" id="Password" name="Password"
-          placeholder="min. 8 characters"></br>
+        <input style="display: inline;" class="form-control mb-3" asp-for="Password" type="password" id="Password" name="Password"
+          placeholder="min. 8 characters"><i style="display: inline;" class="bi bi-eye-slash" id="togglePassword1"></i></br>
         <label class="form-label" for="ConfirmPassword">Confirm Password</label></br>
-        <input class="form-control" type="password" id="ConfirmPassword" name="ConfirmPassword"
-          placeholder="min. 8 characters"></br>
+        <input class="form-control mb-3" style="display: inline;" type="password" id="ConfirmPassword" name="ConfirmPassword"
+          placeholder="min. 8 characters"><i style="display: inline;" class="bi bi-eye-slash" id="togglePassword2"></i></br>
         <label class="form-label" asp-for="FName">First Name</label></br>
         <input class="form-control" asp-for="FName" type="text" id="FName" name="FName" placeholder="John"></br>
         <label class="form-label" asp-for="LName">Last Name</label></br>
@@ -49,15 +50,24 @@
 }
 
 <div class="split2 right">
-  <div class="centered">
-    <img src="img_avatar.png" alt="Avatar man">
-    <h2>John Doe</h2>
-    <p>Some text here too.</p>
+  <div class="right-subtitle" style="text-align: right;">
+    Find talented developers for <br> your startups and projects and<br> find jobs all in one site!
+  </div>
+  <div class="bottom-left">
+    <img src="~/man-sitting.png" alt="Man working on laptop">
   </div>
 
 </div>
 
 <style>
+  .right-subtitle {
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    font-family: myfont;
+    font-size: 2rem;
+    color: white;
+  }
   .split1 {
     height: 100%;
     width: 40%;
@@ -98,4 +108,49 @@
     transform: translate(-50%, -50%);
     text-align: center;
   }
+  .bottom-left {
+    width : 40%;
+    height : 45%;
+    position : absolute;
+    bottom : 5%;
+    left : 10%;
+  }
+  form i {
+    margin-left: -30px;
+    cursor: pointer;
+  }
 </style>
+
+<script>
+  const togglePassword2 = document
+    .querySelector('#togglePassword2');
+  const togglePassword1 = document.querySelector('#togglePassword1');
+  const password1=  document.querySelector('#Password');
+  const password2 = document.querySelector('#ConfirmPassword');
+  togglePassword1.addEventListener('click', () => {
+
+    // Toggle the type attribute using
+    // getAttribure() method
+    const type = password1
+      .getAttribute('type') === 'password' ?
+      'text' : 'password';
+
+    password1.setAttribute('type', type);
+
+    // Toggle the eye and bi-eye icon
+    this.classList.toggle('bi-eye');
+  });
+  togglePassword2.addEventListener('click', () => {
+
+    // Toggle the type attribute using
+    // getAttribure() method
+    const type = password2
+      .getAttribute('type') === 'password' ?
+      'text' : 'password';
+
+    password2.setAttribute('type', type);
+
+    // Toggle the eye and bi-eye icon
+    this.classList.toggle('bi-eye');
+  });
+</script>
