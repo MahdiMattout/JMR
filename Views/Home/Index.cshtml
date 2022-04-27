@@ -6,17 +6,16 @@
 <div class="card-deck">
 @foreach (var post in ViewBag.Posts)
 {
-  <a asp-controller="PostDetials" asp-action="ViewDetails" class="btn stretched-link">
-    <div class="card mb-3" style="max-width: 20rem;">
+  <div class="card mb-3" style="max-width: 20rem;">
+    <a asp-controller="PostDetials" asp-action="ViewDetails" class="btn stretched-link">
       <div class="card-body">
         <h5 class="card-title">@post.Description</h5>
       </div>
       <div class="card-footer d-flex">
         <p class="card-text">@post.priceRange()</p>
       </div>
-          @* <a asp-controller="Hotels" asp-action="ViewHotel" asp-route-id="@post.postId"><input class="btn btn-primary" type="button" value="View"/></a> *@
-    </div>
-  </a>
+    </a>
+  </div>
 }
 </div>
 </div>
