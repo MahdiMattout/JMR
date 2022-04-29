@@ -23,10 +23,26 @@ public class HomeController : Controller
         return View();
     }
 
-    public IActionResult Create()
+    public IActionResult CreateForm()
     {
+        ViewBag.RequiredSkills = new RequiredSkill().getAllRequiredSkills();
         return View();
     }
+
+    [HttpPost]
+    public IActionResult Create(Post post)
+    {
+    var description = post.Description;
+    var minpay = post.minPay;
+    var maxPay = post.maxPay;
+    Post postToInsert = new Post { Description = description, minPay = minpay, maxPay = maxPay };
+    using (var db = new BloggingContext()){
+      db.Add<Post>(postToInsert);
+      db.SaveChanges();
+      
+    }
+    return RedirectToAction("Index");
+  }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
