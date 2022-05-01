@@ -6,14 +6,6 @@ namespace JMR.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
-    // public static List<Post> posts = new List<Post>();
-
-    public HomeController(ILogger<HomeController> logger)
-    {
-        _logger = logger;
-    }
-
     public IActionResult Index()
     {
         using (var db = new BloggingContext())
@@ -32,20 +24,23 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Create(Post post)
     {
-    var description = post.Description;
-    var minpay = post.minPay;
-    var maxPay = post.maxPay;
-    Post postToInsert = new Post { Description = description, minPay = minpay, maxPay = maxPay };
-    var skillIds = postToInsert.extractSkillIds();
-    using (var db = new BloggingContext()){
-      db.Add<Post>(postToInsert);
-      foreach (var skillId in skillIds){
-        db.Add<PostIdSkillId>(new PostIdSkillId { postId = postToInsert.Id, skillId = skillId });
-      }
-      db.SaveChanges();
+        List<PostIdSkillId> postIdSkillIds = new List<PostIdSkillId>();
+        var description = post.Description;
+        var minpay = post.minPay;
+        var maxPay = post.maxPay;
+        Post postToInsert = new Post { Description = description, minPay = minpay, maxPay = maxPay };
+        var skillIds = postToInsert.extractSkillIds();
+        foreach (var skillId in skillIds) {
+            postIdSkillIds.Add(new PostIdSkillId { postId = post.Id, skillId = skillId });
+        }
+        // TODO() records aren't inserted in PostSkillIds
+        using (var db = new BloggingContext()){
+            db.Add<Post>(postToInsert);
+            db.PostSkillIds.AddRange(postIdSkillIds);
+            db.SaveChanges();
+        }
+        return RedirectToAction("Index");
     }
-    return RedirectToAction("Index");
-  }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
