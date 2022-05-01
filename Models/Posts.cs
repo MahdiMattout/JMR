@@ -29,7 +29,7 @@ public class Post
     }
     return skillIds;
   }
-  public string _querySkillName(int skillId){
+  private string querySkillName(int skillId){
     using (var db = new BloggingContext())
     {
       return db.RequiredSkills.Single(RS => RS.Id == skillId).skillName;
@@ -38,7 +38,7 @@ public class Post
   public List<string> queryRequiredSkills(List<int> skillIds){
     List<string> requiredSkillsNames = new List<string>();
     foreach(var skillId in skillIds){
-      requiredSkillsNames.Add(_querySkillName(skillId));
+      requiredSkillsNames.Add(querySkillName(skillId));
     }
     return requiredSkillsNames;
   }

@@ -36,10 +36,13 @@ public class HomeController : Controller
     var minpay = post.minPay;
     var maxPay = post.maxPay;
     Post postToInsert = new Post { Description = description, minPay = minpay, maxPay = maxPay };
+    var skillIds = postToInsert.extractSkillIds();
     using (var db = new BloggingContext()){
       db.Add<Post>(postToInsert);
+      foreach (var skillId in skillIds){
+        db.Add<PostIdSkillId>(new PostIdSkillId { postId = postToInsert.Id, skillId = skillId });
+      }
       db.SaveChanges();
-      
     }
     return RedirectToAction("Index");
   }
