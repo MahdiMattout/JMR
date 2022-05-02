@@ -23,7 +23,7 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult Create(Post post)
+    public IActionResult Create(PostViewModel post)
     {
         List<PostIdSkillId> postIdSkillIds = new List<PostIdSkillId>();
         var description = post.Description;
@@ -31,8 +31,9 @@ public class HomeController : Controller
         var maxPay = post.maxPay;
         Post postToInsert = new Post { Description = description, minPay = minpay, maxPay = maxPay };
         var skillIds = postToInsert.extractSkillIds();
+        Console.WriteLine(post.skills[0]);
         foreach (var skillId in skillIds) {
-            postIdSkillIds.Add(new PostIdSkillId { postId = post.Id, skillId = skillId });
+            postIdSkillIds.Add(new PostIdSkillId { postId = postToInsert.Id, skillId = skillId });
         }
         // TODO() records aren't inserted in PostSkillIds
         using (var db = new BloggingContext()){

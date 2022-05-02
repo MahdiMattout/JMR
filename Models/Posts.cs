@@ -12,6 +12,7 @@ public class Post
 
   public int minPay { get; set; }
   public int maxPay { get; set; }
+  
   public string priceRange(){
     return minPay.ToString() + " - " + maxPay.ToString() + "$";
   }

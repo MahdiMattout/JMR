@@ -1,4 +1,4 @@
-@model JMR.Models.Post
+@model JMR.Models.PostViewModel
 @{
   ViewData["Title"] = "Post";
 }
@@ -18,12 +18,12 @@
   <div class="form-group">
     <h4>Skills Required</h4>
     <div class="form-group">
-    @foreach (var skill in ViewBag.RequiredSkills)
+    @for(int i=0; i < ViewBag.RequiredSkills.Count; i++)
     { 
     <div class="form-check-inline">
-      <input class="form-check-input" type="checkbox" id="gridCheck">
-      <label class="form-check-label" for="gridCheck">
-        @skill
+      <input asp-for="@Model.skills[i]" class="form-check-input" type="checkbox" id="gridCheck" value="@ViewBag.RequiredSkills[i]">
+      <label asp-for="@Model.skills[i]" class="form-check-label" for="gridCheck">
+        @ViewBag.RequiredSkills[i]
       </label>
     </div>
     }

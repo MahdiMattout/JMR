@@ -74,6 +74,9 @@ namespace JMR.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("Title")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("maxPay")
                         .HasColumnType("INTEGER");
 

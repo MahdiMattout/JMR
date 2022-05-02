@@ -11,9 +11,9 @@ public class IUser
   }
   
   [Required]
-  public string? FName {get;set;}
+  public string FName {get;set;} = "";
   [Required]
-  public string? LName{get;set;}
+  public string LName{get;set;} = "";
 
   [Required]
   [Column(TypeName = "datetime2")]
