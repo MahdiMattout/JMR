@@ -3,6 +3,7 @@ using System;
 using JMR.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JMR.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    partial class BloggingContextModelSnapshot : ModelSnapshot
+    [Migration("20220425132440_added credentials table")]
+    partial class addedcredentialstable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "6.0.4");
@@ -63,51 +65,6 @@ namespace JMR.Migrations
                     b.HasKey("userId");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("JMR.Models.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<int>("maxPay")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("minPay")
-                        .HasColumnType("INTEGER");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("JMR.Models.PostIdSkillId", b =>
-                {
-                    b.Property<int>("postId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<int>("skillId")
-                        .HasColumnType("INTEGER");
-
-                    b.ToTable("PostSkillIds");
-                });
-
-            modelBuilder.Entity("JMR.Models.RequiredSkill", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("skillName")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("RequiredSkills");
                 });
 #pragma warning restore 612, 618
         }

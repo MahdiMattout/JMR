@@ -1,0 +1,123 @@
+@model LoginViewModel
+@{
+  Layout = null;
+}
+
+<head>
+  <link rel="stylesheet" href="~/css/custom.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+</head>
+<div class="split1 left">
+  <div class="centered">
+    <h1 class="special">Login</h1>
+    <p>Login with your data.</p>
+    <form asp-action="submitLogin" method="post">
+      <div style="text-align: left;">
+        <label asp-for="Email" class="form-label">Email</label></br>
+        <input asp-for="Email" class="form-control" type="email" id="Email" name="Email"
+          placeholder="name@example.com"></br>
+        <label asp-for="Password" class="form-label">Password</label></br>
+        <input style="display: inline;" asp-for="Password" class="form-control mb-3" type="password" id="Password" name="Password"
+          placeholder="min. 8 characters"><i style="display: inline;" class="bi bi-eye-slash" id="togglePassword"></i></br>
+      </div>
+      <div>
+        <input type="submit" asp-action="submitLogin" value="Add" class="btn btn-primary submit" />
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="split2 right">
+  <div class="right-subtitle" style="text-align: right;">
+    Find talented developers for <br> your startups and projects and<br> find jobs all in one site!
+  </div>
+  <div class="bottom-left">
+    <img src="~/man-sitting.png" alt="Man working on laptop">
+  </div>
+</div>
+
+<style>
+  .bottom-left {
+    width : 40%;
+    height : 45%;
+    position : absolute;
+    bottom : 5%;
+    left : 10%;
+  }
+  .right-subtitle {
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    font-family: myfont;
+    font-size: 2rem;
+    color: white;
+  }
+  .split1 {
+    height: 100%;
+    width: 40%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  .split2 {
+    height: 100%;
+    width: 60%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    padding-top: 20px;
+  }
+
+  /* Control the left side */
+  .left {
+    left: 0;
+  }
+
+  /* Control the right side */
+  .right {
+    right: 0;
+    background-color: #59AC89;
+  }
+
+  /* If you want the content centered horizontally and vertically */
+  .centered {
+    width: 60%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+
+  form i {
+    margin-left: -30px;
+    cursor: pointer;
+  }
+</style>
+
+<script>
+  const togglePassword = document
+    .querySelector('#togglePassword');
+
+  const password = document.querySelector('#password');
+
+  togglePassword.addEventListener('click', () => {
+
+    // Toggle the type attribute using
+    // getAttribure() method
+    const type = password
+      .getAttribute('type') === 'password' ?
+      'text' : 'password';
+
+    password.setAttribute('type', type);
+
+    // Toggle the eye and bi-eye icon
+    this.classList.toggle('bi-eye');
+  });
+</script>
