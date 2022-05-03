@@ -6,7 +6,7 @@ namespace JMR.Controllers;
 
 public class PostDetailsController : Controller
 {
-  public IActionResult ViewDetails(int Id)
+  public IActionResult ViewDetails(int Id, string Days, string Weeks, string Years)
   {
     Post post;
     using (var db = new BloggingContext()){
@@ -15,7 +15,9 @@ public class PostDetailsController : Controller
     ViewBag.PositionTitle = post.Title;
     ViewBag.Description = post.Description;
     ViewBag.requiredSkills = post.extractSkills();
-    // ViewBag.time = post.TimeFrame
+    ViewBag.time = post.timeFrame;
+    string timeUnit;
+    // Years == "check" ? timeUnit="Years" : Weeks == "checked" ? timeUnit = "Weeks" : timeUnit = "Days";
     // ViewBag.PostUser = post.userId;
     return View();
   }
