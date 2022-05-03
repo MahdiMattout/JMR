@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using JMR.Models;
-using Microsoft.AspNetCore.Authorization;
+// using Microsoft.AspNetCore.Authorization;
 
 namespace JMR.Controllers;
 
@@ -23,20 +23,25 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult Create(Post post)
+    public IActionResult Create(Post post, string Python, string SQL, string Cpp )
     {
         List<PostIdSkillId> postIdSkillIds = new List<PostIdSkillId>();
-        var description = post.Description;
-        var minpay = post.minPay;
-        var maxPay = post.maxPay;
-        Post postToInsert = new Post { Description = description, minPay = minpay, maxPay = maxPay };
-        var skillIds = postToInsert.extractSkillIds();
-        foreach (var skillId in skillIds) {
-            postIdSkillIds.Add(new PostIdSkillId { postId = post.Id, skillId = skillId });
+        List<int> skills = new List<int>();
+        int postId;
+        using (var db = new BloggingContext()){
+            db.Add<Post>(post);
+            db.SaveChanges();
+            postId = db.Posts.OrderByDescending(p => p.Id).FirstOrDefault().Id;
+            if (Python == "check") { skills.Add(db.RequiredSkills.Single(r => r.skillName == "Python").Id); }
+            if (SQL == "check") { skills.Add(db.RequiredSkills.Single(r => r.skillName == "SQL").Id); }
+            if (Cpp == "check") { skills.Add(db.RequiredSkills.Single(r => r.skillName == "Cpp").Id); }
+    }
+        foreach (var skillId in skills) {
+            postIdSkillIds.Add(new PostIdSkillId { postId = postId, skillId = skillId });
         }
         // TODO() records aren't inserted in PostSkillIds
         using (var db = new BloggingContext()){
-            db.Add<Post>(postToInsert);
+            // db.Add<Post>(postToInsert);
             db.PostSkillIds.AddRange(postIdSkillIds);
             db.SaveChanges();
         }

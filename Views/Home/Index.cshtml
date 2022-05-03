@@ -7,7 +7,7 @@
 @foreach (var post in ViewBag.Posts)
 {
   <div class="card mb-3" style="max-width: 20rem;">
-    <a asp-controller="PostDetails" asp-action="ViewDetails" asp-Id="@post.Id" class="btn stretched-link">
+    <a asp-controller="PostDetails" asp-action="ViewDetails" asp-route-Id="@post.Id" class="btn stretched-link">
       <div class="card-body">
         <h5 class="card-title">@post.Description</h5>
       </div>

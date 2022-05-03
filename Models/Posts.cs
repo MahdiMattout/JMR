@@ -22,30 +22,17 @@ public class Post
       return db.PostSkillIds.Where(postSkill => postSkill.postId == Id).ToList();
     }
   }
-  public List<int> extractSkillIds(){
+  public List<RequiredSkill> extractSkills()
+  {
     List<PostIdSkillId> postSkillIds = queryPostSkillIds();
-    List<int> skillIds = new List<int>();
-    foreach(var postSkillid in postSkillIds){
-      skillIds.Add(postSkillid.skillId);
-    }
-    return skillIds;
-  }
-  private string querySkillName(int skillId){
+    List<RequiredSkill> skills = new List<RequiredSkill>();
     using (var db = new BloggingContext())
     {
-      return db.RequiredSkills.Single(RS => RS.Id == skillId).skillName;
+      foreach (var postSkillId in postSkillIds)
+      {
+        skills.Add(db.RequiredSkills.Single(s => s.Id == postSkillId.skillId));
+      }
     }
-  }
-  public List<string> queryRequiredSkills(List<int> skillIds){
-    List<string> requiredSkillsNames = new List<string>();
-    foreach(var skillId in skillIds){
-      requiredSkillsNames.Add(querySkillName(skillId));
-    }
-    return requiredSkillsNames;
-  }
-  public List<string> GetRequiredSkills(){
-    using (var db = new BloggingContext()){
-      return queryRequiredSkills(extractSkillIds());
-    }
+    return skills;
   }
 }

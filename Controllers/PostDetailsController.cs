@@ -14,7 +14,7 @@ public class PostDetailsController : Controller
     }
     ViewBag.PositionTitle = post.Title;
     ViewBag.Description = post.Description;
-    ViewBag.requiredSkills = post.GetRequiredSkills();
+    ViewBag.requiredSkills = post.extractSkills();
     // ViewBag.time = post.TimeFrame
     // ViewBag.PostUser = post.userId;
     return View();
