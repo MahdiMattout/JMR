@@ -1,12 +1,12 @@
-<h1>Job Offer Details</h1>
+<h2>Job Offer Details</h2>
 
-<h2>Position Title</h2>
+<h3>Position Title</h3>
 @* <p>@ViewBag.Title</p> *@
-<h2>Position Description</h2>
+<h3>Position Description</h3>
 <p>@ViewBag.Description</p>
-<h1>Skills Required</h1>
+<h2>Skills Required</h2>
 @foreach (var skill in ViewBag.requiredSkills)
 {
-  <input name="@skill.skillName" checked>
+  <input name="@skill.skillName" type="checkbox" checked="true">
   <label>@skill.skillName</label>
 }
