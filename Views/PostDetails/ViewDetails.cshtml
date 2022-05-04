@@ -1,7 +1,7 @@
 <h2>Job Offer Details</h2>
 
 <h3>Position Title</h3>
-@* <p>@ViewBag.Title</p> *@
+<p>@ViewBag.PositionTitle</p>
 <h3>Position Description</h3>
 <p>@ViewBag.Description</p>
 <h2>Skills Required</h2>
@@ -10,4 +10,5 @@
   <input name="@skill.skillName" type="checkbox" checked="true">
   <label>@skill.skillName</label>
 }
-<em><p>@ViewBag.time</p></em>
+<em><p>@ViewBag.time @ViewBag.timeUnit</p></em>
+<em><p>@ViewBag.priceRange</p></em>

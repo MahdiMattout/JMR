@@ -17,7 +17,11 @@ public class PostDetailsController : Controller
     ViewBag.requiredSkills = post.extractSkills();
     ViewBag.time = post.timeFrame;
     string timeUnit;
-    // Years == "check" ? timeUnit="Years" : Weeks == "checked" ? timeUnit = "Weeks" : timeUnit = "Days";
+    if (Years == "select") { timeUnit = "Years"; }
+    else if (Weeks == "select") { timeUnit = "Weeks"; }
+    else { timeUnit = "Days"; }
+    ViewBag.timeUnit = post.timeUnit;
+    ViewBag.priceRange = post.priceRange();
     // ViewBag.PostUser = post.userId;
     return View();
   }

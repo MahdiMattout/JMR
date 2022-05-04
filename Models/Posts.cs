@@ -7,13 +7,15 @@ public class Post
   [Key]
   public int Id { get; set; }
 
-  public string? Title { get; set; }
-  public string? Description { get; set; }
+  public string? Title { get; set; } = "Title";
+  public string? Description { get; set; } = "Description";
 
   public int minPay { get; set; }
   public int maxPay { get; set; }
   public int timeFrame { get; set; }
+  public string timeUnit { get; set; }
   public string priceRange(){
+    if (minPay == 0 && maxPay == 0) { return "Free"; }
     return minPay.ToString() + " - " + maxPay.ToString() + "$";
   }
 

@@ -23,7 +23,7 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult Create(Post post, string Python, string SQL, string Cpp )
+    public IActionResult Create(Post post, string Python, string SQL, string Cpp, string CSharp )
     {
         List<PostIdSkillId> postIdSkillIds = new List<PostIdSkillId>();
         List<int> skills = new List<int>();
@@ -53,4 +53,9 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+
+    public IActionResult Delete(int postId){
+
+        return RedirectToAction("Index");
+  }
 }
