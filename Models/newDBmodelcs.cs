@@ -13,11 +13,11 @@ public class BloggingContext : DbContext
   public string? DbPath { get; }
     public DbSet<Credentials>? credentials { get; set; }
 
-  protected override void OnModelCreating(ModelBuilder modelBuilder)
-  {
-    modelBuilder.Entity<PostIdSkillId>()
-        .HasNoKey();
-  }
+  // protected override void OnModelCreating(ModelBuilder modelBuilder)
+  // {
+  //   modelBuilder.Entity<PostIdSkillId>()
+  //       .HasNoKey();
+  // }
     public BloggingContext()
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;

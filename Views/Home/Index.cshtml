@@ -2,12 +2,36 @@
     ViewData["Title"] = "Home Page";
 }
 
+
+<head>
+  <style>
+  .card{
+    padding: 1.5em .5em .5em;
+    border-radius: 2em;
+    text-align: center;
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+</style>
+</head>
 <div class="container">
-<div class="card-deck">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
 @foreach (var post in ViewBag.Posts)
 {
-  <div class="card mb-3" style="max-width: 20rem;">
-    <a asp-controller="PostDetails" asp-action="ViewDetails" asp-Id="@post.Id" class="btn stretched-link">
+  <div class="col mb-4" style="max-width: 20rem;">
+  <a asp-controller="PostDetails" asp-action="ViewDetails" asp-route-Id="@post.Id" class="btn w-100">
+      <div class="card border-success">
+        <div class="card-body">
+          <h5 class="card-title" style="font-size:16px">@post.Title</h5>
+          <hr/>
+          <div class="d-inline">
+            <i class="fas fa-clock"></i>@post.timeFrame @post.timeUnit @post.priceRange()
+          </div>
+        </div>
+      </div>
+  </a>
+  </div>
+  @* <div class="card mb-3" style="max-width: 20rem;">
+    <a asp-controller="PostDetails" asp-action="ViewDetails" asp-route-Id="@post.Id" class="btn stretched-link">
       <div class="card-body">
         <h5 class="card-title">@post.Description</h5>
       </div>
@@ -15,7 +39,7 @@
         <p class="card-text">@post.priceRange()</p>
       </div>
     </a>
-  </div>
+  </div> *@
 }
-</div>
+  </div>
 </div>
