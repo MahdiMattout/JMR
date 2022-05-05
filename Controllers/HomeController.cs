@@ -16,6 +16,20 @@ public class HomeController : Controller
         return View();
     }
 
+    [HttpGet]
+    public IActionResult Index(string searchString){
+        IEnumerable<Post> posts;
+        using (var db = new BloggingContext()) { posts = db.Posts.ToList(); }
+        if (!string.IsNullOrEmpty(searchString)){
+                posts = posts.Where(p => p.Title!.Contains(searchString));
+        }
+        else{
+        RedirectToAction("Index");
+        }
+        ViewBag.Posts = posts;
+        return View();
+    } 
+
     public IActionResult CreateForm()
     {
         ViewBag.RequiredSkills = new RequiredSkill().getAllRequiredSkills();
