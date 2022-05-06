@@ -18,7 +18,7 @@
 @foreach (var post in ViewBag.Posts)
 {
   <div class="col mb-4" style="max-width: 20rem;">
-  <a asp-controller="PostDetails" asp-action="ViewDetails" asp-route-Id="@post.Id" class="btn w-100">
+  <button onclick="location.href='@Url.Action("ViewDetails", "PostDetails")/@post.Id'" asp-controller="PostDetails" class="btn w-100" data-toggle="modal" data-target="#exampleModalLong">
       <div class="card border-success">
         <div class="card-body">
           <h5 class="card-title" style="font-size:16px">@post.Title</h5>
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-  </a>
+  </button>
   </div>
   @* <div class="card mb-3" style="max-width: 20rem;">
     <a asp-controller="PostDetails" asp-action="ViewDetails" asp-route-Id="@post.Id" class="btn stretched-link">

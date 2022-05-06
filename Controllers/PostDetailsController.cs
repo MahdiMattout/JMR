@@ -22,6 +22,6 @@ public class PostDetailsController : Controller
     ViewBag.timeUnit = post.timeUnit;
     ViewBag.priceRange = post.priceRange();
     // ViewBag.PostUser = post.userId;
-    return View();
+    return PartialView();
   }
 }
