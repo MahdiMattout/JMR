@@ -18,7 +18,7 @@
 @foreach (var post in ViewBag.Posts)
 {
   <div class="col mb-4" style="max-width: 20rem;">
-  <button class="btn w-100" data-toggle="modal" data-target="#exampleModalLong">
+  <button class="btn w-100" data-toggle="modal" data-target="@String.Format("#exampleModalLong{0}",post.Id)">
       <div class="card border-success">
         <div class="card-body">
           <h5 class="card-title" style="font-size:16px">@post.Title</h5>
@@ -30,8 +30,7 @@
       </div>
   </button>
   </div>
-
-  <div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal fade" id="@String.Format("exampleModalLong{0}",post.Id)" tabindex="-1" role="dialog" aria-labelledby="@String.Format("exampleModalLong{0}",post.Id)" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -41,8 +40,10 @@
           </button>
         </div>
         <div class="modal-body">
+          <div>
           <h5>Position Title</h5>
-          @post.Title
+          <p>@post.Title</p>
+          </div>
           <h5>Position Description</h5>
           @post.Description
           <h5>Skills Required</h5>
@@ -63,17 +64,6 @@
       </div>
     </div>
   </div>
-
-  @* <div class="card mb-3" style="max-width: 20rem;">
-    <a asp-controller="PostDetails" asp-action="ViewDetails" asp-route-Id="@post.Id" class="btn stretched-link">
-      <div class="card-body">
-        <h5 class="card-title">@post.Description</h5>
-      </div>
-      <div class="card-footer d-flex">
-        <p class="card-text">@post.priceRange()</p>
-      </div>
-    </a>
-  </div> *@
 }
   </div>
 </div>
