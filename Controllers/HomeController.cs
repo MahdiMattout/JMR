@@ -39,30 +39,33 @@ public class HomeController : Controller
     [HttpPost]
     public IActionResult Create(PostViewModel post)
     {
-        List<PostIdSkillId> postIdSkillIds = new List<PostIdSkillId>();
-        int postId;
-        var Title = post.Title;
-        var description = post.Description;
-        var minpay = post.minPay;
-        var maxPay = post.maxPay;
-        var timeFrame = post.timeFrame;
-        var timeUnit = post.timeUnit;
-        Post postToInsert = new Post { Title=Title, Description = description, minPay = minpay, maxPay = maxPay, timeFrame=timeFrame, timeUnit=timeUnit };
-        using (var db = new BloggingContext()){
-            db.Add<Post>(postToInsert);
-            db.SaveChanges();
-            postId = db.Posts.OrderByDescending(p => p.Id).FirstOrDefault().Id;
-        }
-        foreach (var skillId in post.skillsIds) {
-            postIdSkillIds.Add(new PostIdSkillId { postId = postId, skillId = Int32.Parse(skillId) });
-        }
-        using (var db = new BloggingContext()){
-            // db.Add<Post>(postToInsert);
-            db.PostSkillIds.AddRange(postIdSkillIds);
-            db.SaveChanges();
-        }
+      List<PostIdSkillId> postIdSkillIds = new List<PostIdSkillId>();
+      int postId;
+      var Title = post.Title;
+      var description = post.Description;
+      var minpay = post.minPay;
+      var maxPay = post.maxPay;
+      var timeFrame = post.timeFrame;
+      var timeUnit = post.timeUnit;
+      Post postToInsert = new Post { Title = Title, Description = description, minPay = minpay, maxPay = maxPay, timeFrame = timeFrame, timeUnit = timeUnit };
+      using (var db = new BloggingContext())
+      {
+        db.Add<Post>(postToInsert);
+        db.SaveChanges();
+        postId = db.Posts.OrderByDescending(p => p.Id).FirstOrDefault().Id;
+      }
+      foreach (var skillId in post.skillsIds)
+      {
+        postIdSkillIds.Add(new PostIdSkillId { postId = postId, skillId = Int32.Parse(skillId) });
+      }
+      using (var db = new BloggingContext())
+      {
+        // db.Add<Post>(postToInsert);
+        db.PostSkillIds.AddRange(postIdSkillIds);
+        db.SaveChanges();
+      }
         return RedirectToAction("Index");
-    }
+  }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
