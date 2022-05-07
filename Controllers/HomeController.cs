@@ -1,12 +1,14 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using JMR.Models;
-// using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
+using JMR.helpers;
 
 namespace JMR.Controllers;
 
 public class HomeController : Controller
 {
+    
     public IActionResult Index()
     {
         using (var db = new BloggingContext())
@@ -15,7 +17,7 @@ public class HomeController : Controller
         }
         return View();
     }
-
+    [Authorize]
     [HttpGet]
     public IActionResult Index(string searchString){
         IEnumerable<Post> posts;

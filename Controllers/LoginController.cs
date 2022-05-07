@@ -41,7 +41,8 @@ namespace JMR.Controllers
         byte [] saltbytes = Convert.FromBase64String(salt);
         string UserHashedPassword = Hashing.generateHash(saltbytes, LoginModel.Password);
         if(UserHashedPassword == DbHashedPassword){
-            TempData["Token"] = GenerateJwtToken(LoginModel.Email);
+            string token = GenerateJwtToken(LoginModel.Email);
+            HttpContext.Session.SetString("Token", token);
             return RedirectToAction("Index","Home");
         }
         return RedirectToAction("Login");
