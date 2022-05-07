@@ -15,7 +15,7 @@ namespace JMR.Controllers
     {
         return View();
     }
-    private string GenerateJwtToken(string email){
+    private string GenerateJwtToken(string email, int userId){
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
                 "Test_key_Now_Here"));
 
@@ -25,6 +25,7 @@ namespace JMR.Controllers
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: creds);
             token.Payload["email"] = email;
+            token.Payload["UserId"] = userId;
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
             return jwt;
@@ -41,7 +42,15 @@ namespace JMR.Controllers
         byte [] saltbytes = Convert.FromBase64String(salt);
         string UserHashedPassword = Hashing.generateHash(saltbytes, LoginModel.Password);
         if(UserHashedPassword == DbHashedPassword){
-            string token = GenerateJwtToken(LoginModel.Email);
+            int userId;
+            IUser user;
+            using(var db = new BloggingContext()){
+                Credentials credential = db.credentials.Single(x=>x.Email == LoginModel.Email);
+                user = db.Users.Single(x=> x.CredentialId == credential.Id);
+                userId = user.userId;
+            }
+            userId = user.userId;
+            string token = GenerateJwtToken(LoginModel.Email, userId);
             HttpContext.Session.SetString("Token", token);
             return RedirectToAction("Index","Home");
         }
@@ -65,6 +74,9 @@ namespace JMR.Controllers
             var x = db.credentials.SingleOrDefault(c=>c.Email == email);
             if(x == null){
             db.Add<Credentials>(dbCredentials);
+            db.SaveChanges();
+            Credentials Insertedcredential = db.credentials.Single(x => x.Email == email);
+            dbUser.CredentialId = Insertedcredential.Id;
             db.Add<IUser>(dbUser);
             db.SaveChanges();
             return View("Login");

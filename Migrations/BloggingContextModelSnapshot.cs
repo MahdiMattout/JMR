@@ -49,6 +49,9 @@ namespace JMR.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("CredentialId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("FName")
                         .IsRequired()
                         .HasColumnType("TEXT");
