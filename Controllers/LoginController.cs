@@ -15,23 +15,16 @@ namespace JMR.Controllers
     {
         return View();
     }
-    private string GenerateJwtToken(){
-        List<Claim> claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, "Rony"),
-                new Claim(ClaimTypes.Role, "Admin")
-            };
-
+    private string GenerateJwtToken(string email){
             var key = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(
                 "Test_key_Now_Here"));
 
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
 
             var token = new JwtSecurityToken(
-                claims: claims,
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: creds);
-            token.Payload["rony"] = "rony";
+            token.Payload["email"] = email;
             var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
             return jwt;
@@ -48,7 +41,8 @@ namespace JMR.Controllers
         byte [] saltbytes = Convert.FromBase64String(salt);
         string UserHashedPassword = Hashing.generateHash(saltbytes, LoginModel.Password);
         if(UserHashedPassword == DbHashedPassword){
-            return RedirectToAction("SignUp");
+            TempData["Token"] = GenerateJwtToken(LoginModel.Email);
+            return RedirectToAction("Index","Home");
         }
         return RedirectToAction("Login");
     }
@@ -72,7 +66,6 @@ namespace JMR.Controllers
             db.Add<Credentials>(dbCredentials);
             db.Add<IUser>(dbUser);
             db.SaveChanges();
-            ViewBag.Token = GenerateJwtToken();
             return View("Login");
             }
             else{
