@@ -30,7 +30,7 @@ public class HomeController : Controller
         return View();
     } 
 
-    public IActionResult CreateForm()
+    public IActionResult Create()
     {
         ViewBag.RequiredSkills = new RequiredSkill().getAllRequiredSkills();
         return View();
@@ -38,6 +38,8 @@ public class HomeController : Controller
 
     [HttpPost]
     public IActionResult Create(PostViewModel post)
+    {
+    if (ModelState.IsValid)
     {
       List<PostIdSkillId> postIdSkillIds = new List<PostIdSkillId>();
       int postId;
@@ -56,7 +58,12 @@ public class HomeController : Controller
       }
       foreach (var skillId in post.skillsIds)
       {
-        postIdSkillIds.Add(new PostIdSkillId { postId = postId, skillId = Int32.Parse(skillId) });
+          try
+          {
+            postIdSkillIds.Add(new PostIdSkillId { postId = postId, skillId = Int32.Parse(skillId) });
+          }catch{
+              return View(post);
+          }
       }
       using (var db = new BloggingContext())
       {
@@ -64,7 +71,10 @@ public class HomeController : Controller
         db.PostSkillIds.AddRange(postIdSkillIds);
         db.SaveChanges();
       }
-        return RedirectToAction("Index");
+      return RedirectToAction("Index");
+    }
+    ViewBag.RequiredSkills = new RequiredSkill().getAllRequiredSkills();
+    return View(post);
   }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

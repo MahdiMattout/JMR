@@ -18,6 +18,7 @@ namespace JMR.Models
     public int timeFrame { get; set; }
     [Required(ErrorMessage = "Please select an option between Days, Weeks, or Years.")]
     public string? timeUnit { get; set; }
-    public List<string> skillsIds { get; set; }
+    [Required(ErrorMessage = "The job must have at least one required skill.")]
+    public List<string> skillsIds { get; set; } = new List<string>();
   }
 }
