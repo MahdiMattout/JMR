@@ -37,23 +37,25 @@ public class HomeController : Controller
     }
 
     [HttpPost]
-    public IActionResult Create(Post post, string Python, string SQL, string Cpp, string CSharp )
+    public IActionResult Create(PostViewModel post)
     {
         List<PostIdSkillId> postIdSkillIds = new List<PostIdSkillId>();
-        List<int> skills = new List<int>();
         int postId;
+        var Title = post.Title;
+        var description = post.Description;
+        var minpay = post.minPay;
+        var maxPay = post.maxPay;
+        var timeFrame = post.timeFrame;
+        var timeUnit = post.timeUnit;
+        Post postToInsert = new Post { Title=Title, Description = description, minPay = minpay, maxPay = maxPay, timeFrame=timeFrame, timeUnit=timeUnit };
         using (var db = new BloggingContext()){
-            db.Add<Post>(post);
+            db.Add<Post>(postToInsert);
             db.SaveChanges();
             postId = db.Posts.OrderByDescending(p => p.Id).FirstOrDefault().Id;
-            if (Python == "check") { skills.Add(db.RequiredSkills.Single(r => r.skillName == "Python").Id); }
-            if (SQL == "check") { skills.Add(db.RequiredSkills.Single(r => r.skillName == "SQL").Id); }
-            if (Cpp == "check") { skills.Add(db.RequiredSkills.Single(r => r.skillName == "Cpp").Id); }
-    }
-        foreach (var skillId in skills) {
-            postIdSkillIds.Add(new PostIdSkillId { postId = postId, skillId = skillId });
         }
-        // TODO() records aren't inserted in PostSkillIds
+        foreach (var skillId in post.skillsIds) {
+            postIdSkillIds.Add(new PostIdSkillId { postId = postId, skillId = Int32.Parse(skillId) });
+        }
         using (var db = new BloggingContext()){
             // db.Add<Post>(postToInsert);
             db.PostSkillIds.AddRange(postIdSkillIds);
