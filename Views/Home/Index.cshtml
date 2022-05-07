@@ -18,7 +18,7 @@
 @foreach (var post in ViewBag.Posts)
 {
   <div class="col mb-4" style="max-width: 20rem;">
-  <a asp-controller="PostDetails" asp-action="ViewDetails" asp-route-Id="@post.Id" class="btn w-100">
+  <button class="btn w-100" data-toggle="modal" data-target="@String.Format("#exampleModalLong{0}",post.Id)">
       <div class="card border-success">
         <div class="card-body">
           <h5 class="card-title" style="font-size:16px">@post.Title</h5>
@@ -28,18 +28,42 @@
           </div>
         </div>
       </div>
-  </a>
+  </button>
   </div>
-  @* <div class="card mb-3" style="max-width: 20rem;">
-    <a asp-controller="PostDetails" asp-action="ViewDetails" asp-route-Id="@post.Id" class="btn stretched-link">
-      <div class="card-body">
-        <h5 class="card-title">@post.Description</h5>
+  <div class="modal fade" id="@String.Format("exampleModalLong{0}",post.Id)" tabindex="-1" role="dialog" aria-labelledby="@String.Format("exampleModalLong{0}",post.Id)" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLongTitle">Job Offer Details</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+          <h5>Position Title</h5>
+          <p>@post.Title</p>
+          </div>
+          <h5>Position Description</h5>
+          @post.Description
+          <h5>Skills Required</h5>
+          @foreach (var skill in post.extractSkills())
+          {
+            <input name="@skill.skillName" type="checkbox" checked="true">
+            <label>@skill.skillName</label>
+          }
+          <div></div>
+          <div class="d-inline">
+            <i class="fas fa-clock"></i>@post.timeFrame @post.timeUnit @post.priceRange()
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
       </div>
-      <div class="card-footer d-flex">
-        <p class="card-text">@post.priceRange()</p>
-      </div>
-    </a>
-  </div> *@
+    </div>
+  </div>
 }
   </div>
 </div>

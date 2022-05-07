@@ -16,6 +16,13 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/JMR.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <style>
+        .navLink:active{
+            color:green;
+            border-bottom: solid 2px;
+            border-bottom-color: green;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -30,20 +37,12 @@
                     <input class="form-control mr-sm-2" type="search" name="SearchString" placeholder="Search" aria-label="Search by Title">
                     <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Filter" />
                 </form>
-                <div class="navbar-collapse collapse d-sm-inline-flex">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Explore</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="CreateForm">Create</a>
-                        </li>
-                        <li class="nav-item">
-                            <button class="btn btn-light">
-                                <a class="nav-link text-success" asp-area="" asp-controller="Home" asp-action="Index">MM</a>
-                            </button>
-                        </li>
-                    </ul>
+                <div class="navbar-collapse collapse d-flex flex-row justify-content-end">
+                    <a class="nav-link text-dark navLink" asp-area="" asp-controller="Home" asp-action="Index">Explore</a>
+                    <a class="nav-link navLink" asp-area="" asp-controller="Home" asp-action="CreateForm">Create</a></div>
+                    <button class="btn btn-light">
+                        <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">MM</a>
+                    </button>
                 </div>
             </div>
         </nav>
