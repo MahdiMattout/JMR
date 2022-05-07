@@ -83,8 +83,12 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
+    [HttpPost]
     public IActionResult Delete(int postId){
-
-        return RedirectToAction("Index");
+    using (var db = new BloggingContext()){
+        db.Remove<Post>(db.Posts.Where(p => p.Id == postId).First());
+        db.SaveChanges();
+    }
+    return RedirectToAction("Index");
   }
 }
