@@ -19,11 +19,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = false
         };
     });
+builder.Services.AddMvc()
+        .AddSessionStateTempDataProvider();
+builder.Services.AddSession();
 var app = builder.Build();
-var salt = Hashing.generateSalt();
-string password = "rony";
-var hash = Hashing.generateHash(salt, password);
-string saltstring = Convert.ToBase64String(salt);
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
@@ -36,6 +35,19 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+
+
+app.UseSession();
+app.Use(async (context, next) =>    
+{
+    var token = context.Session.GetString("Token"); 
+    if (!string.IsNullOrEmpty(token))  
+    {
+        context.Request.Headers.Add("Authorization", "Bearer " + token);
+    }
+    await next();
+});
 
 app.UseAuthentication();
 

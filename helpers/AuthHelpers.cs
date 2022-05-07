@@ -3,13 +3,12 @@ namespace JMR.helpers
 {
     public class AuthHelpers
     {
-        public static string getUserEmail(HttpRequest request){
-             string BearerToken = request.Headers["Authorization"];
-             var jwtEncodedString = BearerToken.Substring(7);
-             var handler = new JwtSecurityTokenHandler();
+        public static string getUserEmail(HttpContext context){ //Just pass Httpcontext in the controller
+            string jwtEncodedString = context.Session.GetString("Token");
+            var handler = new JwtSecurityTokenHandler();
             var jsonToken = handler.ReadJwtToken(jwtEncodedString);
-            string r = (string)jsonToken.Payload["email"];
-            return r;
+            string email = (string)jsonToken.Payload["email"];
+            return email;
         }
     }
 }
