@@ -8,17 +8,21 @@ namespace JMR.Controllers;
 
 public class HomeController : Controller
 {
-    
+    [HttpGet]
     public IActionResult Index()
     {
-        using (var db = new BloggingContext())
-        {
-            ViewBag.Posts = db.Posts.ToList();
-        }
-        return View();
+
+    using (var db = new BloggingContext())
+    {
+      var credentialId = db.credentials.Single(c => c.Email == AuthHelpers.getUserEmail(HttpContext)).Id;
+      var User = db.Users.Single(user => user.CredentialId == credentialId);
+      ViewBag.Posts = db.Posts.ToList();
+      ViewBag.Intials = User.getUserInitials();
+    }
+    return View();
     }
     [Authorize]
-    [HttpGet]
+    [HttpPost]
     public IActionResult Index(string searchString){
         IEnumerable<Post> posts;
     Console.WriteLine("Email " + AuthHelpers.getUserEmail(HttpContext));
@@ -32,7 +36,7 @@ public class HomeController : Controller
         ViewBag.Posts = posts;
         return View();
     } 
-
+    [HttpGet]
     public IActionResult Create()
     {
         ViewBag.RequiredSkills = new RequiredSkill().getAllRequiredSkills();
@@ -65,7 +69,7 @@ public class HomeController : Controller
           {
             postIdSkillIds.Add(new PostIdSkillId { postId = postId, skillId = Int32.Parse(skillId) });
           }catch{
-              return View(post);
+              // return View(post);
           }
       }
       using (var db = new BloggingContext())
@@ -74,10 +78,10 @@ public class HomeController : Controller
         db.PostSkillIds.AddRange(postIdSkillIds);
         db.SaveChanges();
       }
-      return RedirectToAction("Index");
+    return RedirectToAction("Index");
     }
     ViewBag.RequiredSkills = new RequiredSkill().getAllRequiredSkills();
-    return View(post);
+    return View();
   }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

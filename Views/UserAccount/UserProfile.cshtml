@@ -41,7 +41,7 @@
       @* </button> *@
     </div>
     <div class="mb-5">
-      <a asp-action="Logout" asp-controller="LoginController"><div class="d-flex profileBtn">
+      <a onclick="localStorage.clear();" asp-action="SignUp" asp-controller="Login"><div class="d-flex profileBtn">
         <div style="padding: 16px; padding-right: 12px">
           <img src="~/profileIcon.png" alt="Account" width="40px" height="40px">
         </div>
