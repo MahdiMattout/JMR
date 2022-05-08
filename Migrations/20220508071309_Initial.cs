@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JMR.Migrations
 {
-    public partial class mergedheads : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,8 +30,8 @@ namespace JMR.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: true),
-                    Description = table.Column<string>(type: "TEXT", nullable: true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
                     minPay = table.Column<int>(type: "INTEGER", nullable: false),
                     maxPay = table.Column<int>(type: "INTEGER", nullable: false),
                     timeFrame = table.Column<int>(type: "INTEGER", nullable: false),
@@ -84,6 +84,26 @@ namespace JMR.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.userId);
                 });
+
+            migrationBuilder.InsertData(
+                table: "RequiredSkills",
+                columns: new[] { "Id", "skillName" },
+                values: new object[] { 1, "Python" });
+
+            migrationBuilder.InsertData(
+                table: "RequiredSkills",
+                columns: new[] { "Id", "skillName" },
+                values: new object[] { 2, "C++" });
+
+            migrationBuilder.InsertData(
+                table: "RequiredSkills",
+                columns: new[] { "Id", "skillName" },
+                values: new object[] { 3, "SQL" });
+
+            migrationBuilder.InsertData(
+                table: "RequiredSkills",
+                columns: new[] { "Id", "skillName" },
+                values: new object[] { 4, "C#" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_credentials_Email",
