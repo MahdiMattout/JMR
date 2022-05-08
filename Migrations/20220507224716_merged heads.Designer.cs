@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JMR.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20220507141248_initialDb")]
-    partial class initialDb
+    [Migration("20220507224716_merged heads")]
+    partial class mergedheads
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49,6 +49,9 @@ namespace JMR.Migrations
                 {
                     b.Property<int>("userId")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CredentialId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("FName")

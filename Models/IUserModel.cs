@@ -18,5 +18,7 @@ public class IUser
   [Required]
   [Column(TypeName = "datetime2")]
   public DateTime birthDate{get;set;}
+  [ForeignKey("credentialId")]
+  public int CredentialId{get;set;}
 
 }
