@@ -40,18 +40,22 @@
           </button>
         </div>
         <div class="modal-body">
-          <div>
+          <div class="pb-5">
           <h5>Position Title</h5>
           <p>@post.Title</p>
           </div>
+          <div class="pb-5">
           <h5>Position Description</h5>
           @post.Description
+          </div>
+          <div class="pb-5">
           <h5>Skills Required</h5>
           @foreach (var skill in post.extractSkills())
           {
             <input name="@skill.skillName" type="checkbox" checked="true">
             <label>@skill.skillName</label>
           }
+          </div>
           <div></div>
           <div class="d-inline">
             <i class="fas fa-clock"></i>@post.timeFrame @post.timeUnit @post.priceRange()
@@ -59,7 +63,10 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <form asp-action="Delete" asp-controller="Home" method="post">
+            <input type="hidden" name="postId" value="@post.Id">
+            <input type="submit" class="btn btn-primary" value="Delete">
+          </form>
         </div>
       </div>
     </div>

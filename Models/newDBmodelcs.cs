@@ -13,11 +13,15 @@ public class BloggingContext : DbContext
   public string? DbPath { get; }
     public DbSet<Credentials>? credentials { get; set; }
 
-  // protected override void OnModelCreating(ModelBuilder modelBuilder)
-  // {
-  //   modelBuilder.Entity<PostIdSkillId>()
-  //       .HasNoKey();
-  // }
+  protected override void OnModelCreating(ModelBuilder modelBuilder)
+  {
+    modelBuilder.Entity<RequiredSkill>().HasData(
+      new RequiredSkill { Id = 1, skillName = "Python" },
+      new RequiredSkill { Id = 2, skillName = "C++" },
+      new RequiredSkill {Id = 3, skillName = "SQL"},
+      new RequiredSkill { Id = 4, skillName = "C#"}
+    );
+  }
     public BloggingContext()
     {
         var folder = Environment.SpecialFolder.LocalApplicationData;

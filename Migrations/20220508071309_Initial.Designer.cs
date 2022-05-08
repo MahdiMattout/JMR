@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JMR.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20220507224716_merged heads")]
-    partial class mergedheads
+    [Migration("20220508071309_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -77,9 +77,11 @@ namespace JMR.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("maxPay")
@@ -129,6 +131,28 @@ namespace JMR.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("RequiredSkills");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            skillName = "Python"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            skillName = "C++"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            skillName = "SQL"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            skillName = "C#"
+                        });
                 });
 #pragma warning restore 612, 618
         }
