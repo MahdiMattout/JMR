@@ -21,9 +21,10 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Index(string searchString){
         IEnumerable<Post> posts;
-        using (var db = new BloggingContext()) { posts = db.Posts.ToList(); }
+    Console.WriteLine("Email " + AuthHelpers.getUserEmail(HttpContext));
+    using (var db = new BloggingContext()) { posts = db.Posts.ToList(); }
         if (!string.IsNullOrEmpty(searchString)){
-                posts = posts.Where(p => p.Title!.Contains(searchString));
+          posts = posts.Where(p => p.Title!.Contains(searchString));
         }
         else{
         RedirectToAction("Index");
