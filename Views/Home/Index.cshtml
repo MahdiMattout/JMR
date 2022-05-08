@@ -1,79 +1,108 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+  ViewData["Title"] = "Home Page";
 }
 
 
 <head>
   <style>
-  .card{
-    padding: 1.5em .5em .5em;
-    border-radius: 2em;
-    text-align: center;
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);
-}
-</style>
+    .card {
+      padding: 1.5em .5em .5em;
+      border-radius: 2em;
+      text-align: center;
+      box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    }
+  </style>
 </head>
 <div class="container">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4">
-@foreach (var post in ViewBag.Posts)
-{
-  <div class="col mb-4" style="max-width: 20rem;">
-  <button class="btn w-100" data-toggle="modal" data-target="@String.Format("#exampleModalLong{0}",post.Id)">
-      <div class="card border-success">
-        <div class="card-body">
-          <h5 class="card-title" style="font-size:16px">@post.Title</h5>
-          <hr/>
-          <div class="d-inline">
-            <i class="fas fa-clock"></i>@post.timeFrame @post.timeUnit @post.priceRange()
+    @foreach (var post in ViewBag.Posts)
+    {
+      <div class="col mb-4" style="max-width: 20rem;">
+        <button class="btn w-100" data-toggle="modal" data-target="@String.Format("#exampleModalLong{0}",post.Id)">
+          <div class="card border-success">
+            <div class="card-body">
+              <h5 class="card-title" style="font-size:16px">@post.Title</h5>
+              <hr />
+              <div class="d-inline">
+                <i class="fas fa-clock"></i>@post.timeFrame @post.timeUnit @post.priceRange()
+              </div>
+            </div>
+            <div style= "display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; padding: 0 12px;">
+              @foreach (var skill in post.extractSkills())
+              {
+                string icon = "";
+                string text = skill.skillName;
+                @if (skill.skillName == "Python")
+                {
+                  icon = "fa-brands fa-python";
+                }
+                else if (skill.skillName == "C++")
+                {
+                  icon = "fab fa-cuttlefish";
+                  text = "++";
+                }
+                else if (skill.skillName == "C#")
+                {
+                  icon = "fab fa-cuttlefish";
+                  text = "#";
+                }
+                else if (skill.skillName == "SQL")
+                {
+                  icon = "fas fa-database";
+                }
+                  <i style="background-color: #EDEEF2; padding: 4px 12px; border-radius : 10px; margin-bottom: 8px;"
+                class="@icon">@text</i>
+              }
+            </div>
+          </div>
+        </button>
+      </div>
+      <div class="modal fade" id="@String.Format("exampleModalLong{0}",post.Id)" tabindex="-1" role="dialog"
+      aria-labelledby="@String.Format("exampleModalLong{0}",post.Id)" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Job Offer Details</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="pb-5">
+                <h5>Position Title</h5>
+                <p>@post.Title</p>
+              </div>
+              <div class="pb-5">
+                <h5>Position Description</h5>
+                @post.Description
+              </div>
+              <div class="pb-5">
+                <h5>Skills Required</h5>
+                @foreach (var skill in post.extractSkills())
+                {
+                  <input name="@skill.skillName" type="checkbox" checked="true">
+                  <label>@skill.skillName</label>
+                }
+              </div>
+              <div></div>
+              <div class="d-inline">
+                <i class="fas fa-clock"></i>@post.timeFrame @post.timeUnit @post.priceRange()
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <form asp-action="Delete" asp-controller="Home" method="post">
+                <input type="hidden" name="postId" value="@post.Id">
+                <input type="submit" class="btn btn-primary" value="Delete">
+              </form>
+            </div>
           </div>
         </div>
       </div>
-  </button>
-  </div>
-  <div class="modal fade" id="@String.Format("exampleModalLong{0}",post.Id)" tabindex="-1" role="dialog" aria-labelledby="@String.Format("exampleModalLong{0}",post.Id)" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Job Offer Details</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="pb-5">
-          <h5>Position Title</h5>
-          <p>@post.Title</p>
-          </div>
-          <div class="pb-5">
-          <h5>Position Description</h5>
-          @post.Description
-          </div>
-          <div class="pb-5">
-          <h5>Skills Required</h5>
-          @foreach (var skill in post.extractSkills())
-          {
-            <input name="@skill.skillName" type="checkbox" checked="true">
-            <label>@skill.skillName</label>
-          }
-          </div>
-          <div></div>
-          <div class="d-inline">
-            <i class="fas fa-clock"></i>@post.timeFrame @post.timeUnit @post.priceRange()
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <form asp-action="Delete" asp-controller="Home" method="post">
-            <input type="hidden" name="postId" value="@post.Id">
-            <input type="submit" class="btn btn-primary" value="Delete">
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-}
+    }
   </div>
 </div>
 <script>
   localStorage.setItem('token', '@TempData["Token"]')
 </script>
+<script src="https://kit.fontawesome.com/2e7a4b291b.js" crossorigin="anonymous"></script>
