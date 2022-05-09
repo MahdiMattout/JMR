@@ -20,4 +20,9 @@ public class UserAccountController : Controller
     }
     return View();
   }
+
+  public IActionResult submitLogout(){
+    HttpContext.Session.Clear();
+    return RedirectToAction("SignUp","Login");
+  }
 }
