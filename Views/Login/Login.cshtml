@@ -16,10 +16,10 @@
     <form asp-action="submitLogin" method="post">
       <div style="text-align: left;">
         <label asp-for="Email" class="form-label">Email</label></br>
-        <input asp-for="Email" class="form-control" type="email" id="Email" name="Email"
+        <input required asp-for="Email" class="form-control" type="email" id="Email" name="Email"
           placeholder="name@example.com"></br>
         <label asp-for="Password" class="form-label">Password</label></br>
-        <input style="display: inline;" asp-for="Password" class="form-control mb-3" type="password" id="Password"
+        <input required style="display: inline;" asp-for="Password" class="form-control mb-3" type="password" id="Password"
           name="Password" placeholder="min. 8 characters"><i style="display: inline;" class="bi bi-eye-slash"
           id="togglePassword"></i></br>
       </div>

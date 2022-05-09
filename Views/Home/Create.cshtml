@@ -9,32 +9,33 @@
   <div class="form-row">
     <div class="form-group col-12">
       <label asp-for="Title">Position Title</label>
-      <input asp-for="Title" type="text" class="form-control" id="Title" maxlength="50">
+      <input required asp-for="Title" type="text" class="form-control" id="Title" maxlength="50">
     </div>
   </div>
     <div class="form-group">
       <label asp-for="Description">Position Description</label>
-      <textarea asp-for="Description" type="" class="form-control" id="description" rows="4"></textarea>
+      <textarea required asp-for="Description" type="" class="form-control" id="description" rows="4"></textarea>
     </div>
   <div class="form-group">
     <h4>Skills Required</h4>
     <div class="form-group">
     @for (int i = 0; i < ViewBag.RequiredSkills.Count; i++)
     { 
-    <div class="form-check-inline">
-      <input asp-for="@Model.skillsIds[i]" class="form-check-input" type="checkbox" id="@ViewBag.RequiredSkills[i].Id" value="@ViewBag.RequiredSkills[i].Id">
-      <input asp-for="@Model.skillsIds[i]" type="hidden" value="false">
-      <label asp-for="@Model.skillsIds[i]"  class="form-check-label" for="gridCheck">
-          @ViewBag.RequiredSkills[i].skillName
-      </label>
-    </div>
+      <div class="form-check-inline">
+        <input asp-for="@Model.skillsIds[i]" name="skill" class="form-check-input" type="checkbox" id="@ViewBag.RequiredSkills[i].Id" value="@ViewBag.RequiredSkills[i].Id">
+        <input asp-for="@Model.skillsIds[i]" type="hidden" value="false">
+        <label asp-for="@Model.skillsIds[i]"  class="form-check-label" for="gridCheck">
+            @ViewBag.RequiredSkills[i].skillName
+        </label>
+      </div>
     }
+    <div style="color: red; display: none; margin-top: 10px;" id="errorMsg">You need to choose at least 1 skill!</div>
     </div>
   </div>
   <div class="form-row">
     <div class="form-group col-md-7">
       <label for="timeFrame">Time Frame</label>
-      <input asp-for="timeFrame" type="number" min="1" class="form-control" id="timeFrame" placeholder="1">
+      <input required asp-for="timeFrame" type="number" min="1" class="form-control" id="timeFrame">
     </div>
     <div class="form-group col-md-4">
       <label>Unit</label>
@@ -48,14 +49,25 @@
   <div class="form-row">
     <div class="form-group col-md-6">
       <label asp-for="minPay">Minimum Salary</label>
-      <input type="number" min="0" class="form-control" id="minPay" name="minPay">
+      <input required type="number" min="0" class="form-control" id="minPay" name="minPay">
     </div>
     <div class="form-group col-md-6">
       <label asp-for="maxPay">Maximum Salary</label>
-      <input type="number" min="0" class="form-control" id="maxPay" name="maxPay">
+      <input required type="number" min="0" class="form-control" id="maxPay" name="maxPay">
     </div>
   </div>
   <button type="reset" class="btn btn-primary">Discard Changes</button>
-  <input type="submit" class="btn btn-primary" asp-controller="Home" asp-action="Create" value="Post">
+  <input required type="submit" class="btn btn-primary" id="post" value="Post">
 </form>
 
+
+<script>
+
+  document.getElementById("post").addEventListener("click", function(event){
+    if (!$('input[name=skill]:checked').length > 0) {
+      event.preventDefault()
+      document.querySelector("#errorMsg").style.display="block";
+    }
+  });
+
+</script>
