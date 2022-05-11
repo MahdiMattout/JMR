@@ -15,29 +15,32 @@
     <p>Signup with your data.</p>
     <form asp-action="submitSignUp" method="post">
       <div style="text-align: left;">
+        <label class="form-label" asp-for="FName">First Name</label></br>
+        <input required class="form-control" asp-for="FName" type="text" id="FName" name="FName" placeholder="John"></br>
+        <label class="form-label" asp-for="LName">Last Name</label></br>
+        <input required class="form-control" asp-for="LName" type="text" id="LName" name="LName" placeholder="Doe"></br>
+        <label class="form-label" asp-for="birthDate">Birth Date</label></br>
+        <input required class="form-control" asp-for="birthDate" type="Date" id="birthDate" name="birthDate"
+          placeholder="Doe"></br>
         <label asp-for="Email" class="form-label">Email</label></br>
-        <input asp-for="Email" class="form-control" type="email" id="Email" name="Email"
+        <input required asp-for="Email" pattern="[^@@ \t\r\n]+@@[^@@ \t\r\n]+\.[^@@ \t\r\n]+" class="form-control" type="email" id="Email" name="Email"
           placeholder="name@example.com"></br>
         <label class="form-label" asp-for="Password">Password</label></br>
-        <input style="display: inline;" class="form-control mb-3" asp-for="Password" type="password" id="Password" name="Password"
+        <input required pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$" style="display: inline;" class="form-control mb-3" asp-for="Password" type="password" id="Password" name="Password"
           placeholder="min. 8 characters"><i style="display: inline;" class="bi bi-eye-slash" id="togglePassword1"></i></br>
+        <p style="color: gray; font-size: 12; text-align: center;">Password must include a number, and an upper and a lower case letter.</p>
         <label class="form-label" for="ConfirmPassword">Confirm Password</label></br>
-        <input class="form-control mb-3" style="display: inline;" type="password" id="ConfirmPassword" name="ConfirmPassword"
+        <input required class="form-control mb-3" style="display: inline;" type="password" id="ConfirmPassword" name="ConfirmPassword"
           placeholder="min. 8 characters"><i style="display: inline;" class="bi bi-eye-slash" id="togglePassword2"></i></br>
-        <label class="form-label" asp-for="FName">First Name</label></br>
-        <input class="form-control" asp-for="FName" type="text" id="FName" name="FName" placeholder="John"></br>
-        <label class="form-label" asp-for="LName">Last Name</label></br>
-        <input class="form-control" asp-for="LName" type="text" id="LName" name="LName" placeholder="Doe"></br>
-        <label class="form-label" asp-for="birthDate">Birth Date</label></br>
-        <input class="form-control" asp-for="birthDate" type="Date" id="birthDate" name="birthDate"
-          placeholder="Doe"></br>
+        <div style="color: red; display: none; text-align: center;" id="errorMsg">Passwords do not match!</div>
+        <div style="color: red; display: none; text-align: center;" id="errorMsg2">This email already exists!</div>
       </div>
       <div>
-        <input type="submit" asp-action="submitSignUp" value="Add" class="btn btn-primary submit" />
+        <input type="submit" id="button" value="Add" style="margin-top: 20px;" class="btn btn-primary submit" />
       </div>
-  <div>
-    <a asp-area="" asp-controller="Login" asp-action="Login">Already have an account? Sign in!</a>
-  </div>
+      <div style="margin-top: 20px;">
+        <a asp-area="" asp-controller="Login" asp-action="Login">Already have an account? Sign in!</a>
+      </div>
     </form>
   </div>
 </div>
@@ -46,10 +49,9 @@
 {
   <script type="text/javascript">
     window.onload = function () {
-      alert("aaaa");
+      document.querySelector("#errorMsg2").style.display="block";
     };  
   </script>
-
 }
 
 <div class="split2 right">
@@ -156,4 +158,12 @@
     // Toggle the eye and bi-eye icon
     this.classList.toggle('bi-eye');
   });
+
+  document.getElementById("button").addEventListener("click", function(event){
+    if (Password.value!=ConfirmPassword.value) {
+      event.preventDefault()
+      document.querySelector("#errorMsg").style.display="block";
+    }
+  });
+
 </script>
