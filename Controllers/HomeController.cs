@@ -8,7 +8,7 @@ namespace JMR.Controllers;
 
 public class HomeController : Controller
 {
-    [HttpGet]
+  [Authorize]
     public IActionResult Index()
     {
 
@@ -22,7 +22,7 @@ public class HomeController : Controller
     return View();
     }
     [Authorize]
-    [HttpPost]
+    [HttpGet]
     public IActionResult Index(string searchString){
         IEnumerable<Post> posts;
     Console.WriteLine("Email " + AuthHelpers.getUserEmail(HttpContext));
