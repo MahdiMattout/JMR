@@ -8,7 +8,7 @@ namespace JMR.Controllers;
 
 public class HomeController : Controller
 {
-    [HttpGet]
+  [Authorize]
     public IActionResult Index()
     {
 
@@ -22,11 +22,10 @@ public class HomeController : Controller
     return View();
     }
     [Authorize]
-    [HttpPost]
+    [HttpGet]
     public IActionResult Index(string searchString){
-        IEnumerable<Post> posts;
-    Console.WriteLine("Email " + AuthHelpers.getUserEmail(HttpContext));
-    using (var db = new BloggingContext()) { posts = db.Posts.ToList(); }
+      IEnumerable<Post> posts;
+      using (var db = new BloggingContext()) { posts = db.Posts.ToList(); }
         if (!string.IsNullOrEmpty(searchString)){
           posts = posts.Where(p => p.Title!.Contains(searchString));
         }
