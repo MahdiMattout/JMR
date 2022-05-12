@@ -11,9 +11,9 @@
 </head>
 <div class="split1 left">
   <div class="centered">
-    <h1 class="special">Login</h1>
+    <h1 class="special" style="font-size: 60px">Login</h1>
     <p>Login with your data.</p>
-    <form asp-action="submitLogin" method="post">
+    <form asp-action="submitLogin" method="post" style="margin-top: 100px;">
       <div style="text-align: left;">
         <label asp-for="Email" class="form-label">Email</label></br>
         <input required asp-for="Email" class="form-control" type="email" id="Email" name="Email"
@@ -23,11 +23,12 @@
           name="Password" placeholder="min. 8 characters"><i style="display: inline;" class="bi bi-eye-slash"
           id="togglePassword"></i></br>
       </div>
-      <div>
-        <input type="submit" asp-action="submitLogin" value="Add" class="btn btn-primary submit" />
+      <div style="width: 100%; text-align: center; background-color: rgba(89, 172, 137, 1); border-radius: 8px; padding: 2px; margin-top: 100px;">
+        <input type="submit" asp-action="submitLogin" value="Login" class="btn text-white" style="width: 100%"/>
       </div>
-      <div>
-        <a asp-area="" asp-controller="Login" asp-action="Signup">Don't have an account? Sign Up!</a>
+      <div style="margin-top: 20px; margin-bottom: 50px; text-align: center;;">
+        Don't have an account?
+        <a asp-area="" asp-controller="Login" asp-action="Signup" style="color: #59AC89"> Sign Up!</a>
       </div>
     </form>
   </div>
@@ -98,7 +99,6 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-align: center;
   }
 
   form i {

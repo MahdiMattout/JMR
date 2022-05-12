@@ -11,9 +11,9 @@
 </head>
 <div class="split1 left">
   <div class="centered">
-    <h1 class="special">Signup</h1>
+    <h1 class="special" style="font-size: 60px">Signup</h1>
     <p>Signup with your data.</p>
-    <form asp-action="submitSignUp" method="post">
+    <form asp-action="submitSignUp" method="post" style="margin-top: 100px;">
       <div style="text-align: left;">
         <label class="form-label" asp-for="FName">First Name</label></br>
         <input required class="form-control" asp-for="FName" type="text" id="FName" name="FName" placeholder="John"></br>
@@ -26,7 +26,7 @@
         <input required asp-for="Email" pattern="[^@@ \t\r\n]+@@[^@@ \t\r\n]+\.[^@@ \t\r\n]+" class="form-control" type="email" id="Email" name="Email"
           placeholder="name@example.com"></br>
         <label class="form-label" asp-for="Password">Password</label></br>
-        <input required pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$" style="display: inline;" class="form-control mb-3" asp-for="Password" type="password" id="Password" name="Password"
+        <input required pattern="^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$" style="display: inline;" class="form-control" asp-for="Password" type="password" id="Password" name="Password"
           placeholder="min. 8 characters"><i style="display: inline;" class="bi bi-eye-slash" id="togglePassword1"></i></br>
         <p style="color: gray; font-size: 12; text-align: center;">Password must include a number, and an upper and a lower case letter.</p>
         <label class="form-label" for="ConfirmPassword">Confirm Password</label></br>
@@ -35,11 +35,12 @@
         <div style="color: red; display: none; text-align: center;" id="errorMsg">Passwords do not match!</div>
         <div style="color: red; display: none; text-align: center;" id="errorMsg2">This email already exists!</div>
       </div>
-      <div>
-        <input type="submit" id="button" value="Add" style="margin-top: 20px;" class="btn btn-primary submit" />
+      <div style="width: 100%; text-align: center; background-color: rgba(89, 172, 137, 1); border-radius: 8px; padding: 2px; margin-top: 100px;">
+        <input type="submit" id="button" value="Signup" class="btn text-white" style="width: 100%" />
       </div>
-      <div style="margin-top: 20px;">
-        <a asp-area="" asp-controller="Login" asp-action="Login">Already have an account? Sign in!</a>
+      <div style="margin-top: 20px; margin-bottom: 50px; text-align: center;">
+        Already have an account?
+        <a asp-area="" asp-controller="Login" asp-action="Login" style="color: #59AC89"> Sign in!</a>
       </div>
     </form>
   </div>
@@ -80,7 +81,6 @@
     z-index: 1;
     top: 0;
     overflow-x: hidden;
-    padding-top: 20px;
   }
 
   .split2 {
@@ -111,7 +111,7 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-align: center;
+    margin-top: 200px;
   }
   .bottom-left {
     width : 40%;
