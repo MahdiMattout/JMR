@@ -102,7 +102,7 @@
 
 <script>
   document.getElementById("post").addEventListener("click", function(event){
-    if (!$('input[name=skill]:checked').length > 0) {
+    if (!$('input[type=checkbox]:checked').length > 0) {
       event.preventDefault()
       document.querySelector("#errorMsg").style.display="block";
     }

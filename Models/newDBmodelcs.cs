@@ -19,7 +19,11 @@ public class BloggingContext : DbContext
       new RequiredSkill { Id = 1, skillName = "Python" },
       new RequiredSkill { Id = 2, skillName = "C++" },
       new RequiredSkill {Id = 3, skillName = "SQL"},
-      new RequiredSkill { Id = 4, skillName = "C#"}
+      new RequiredSkill { Id = 4, skillName = "C#"},
+      new RequiredSkill { Id = 5, skillName = "HTML"},
+      new RequiredSkill { Id = 6, skillName = "Java"},
+      new RequiredSkill { Id = 7, skillName = "Javascript"},
+      new RequiredSkill { Id = 8, skillName = "CSS"}
     );
   }
     public BloggingContext()
