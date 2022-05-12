@@ -1,5 +1,5 @@
 using System.ComponentModel.DataAnnotations;
-// using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 namespace JMR.Models;
 
 public class Post
@@ -20,8 +20,8 @@ public class Post
   public int timeFrame { get; set; }
   [Required(ErrorMessage = "Please select an option between Days, Weeks, or Years.")]
   public string? timeUnit { get; set; }
-  // [ForeignKey("User")]
-  // public int userId { get; set; }
+  [ForeignKey("User")]
+  public int userId { get; set; }
   public string priceRange(){
     if (minPay == 0 && maxPay == 0) { return "Free"; }
     return minPay.ToString() + " - " + maxPay.ToString() + "$";
@@ -44,5 +44,14 @@ public class Post
       }
     }
     return skills;
+  }
+  public string getPosterEmail(){
+    string email = "";
+    using (var db = new BloggingContext()){
+      IUser poster = db.Users.Single(p => p.userId == userId);
+      Credentials credential = db.credentials.Single(c => c.Id == poster.CredentialId);
+      email = credential.Email;
+    }
+    return email;
   }
 }
