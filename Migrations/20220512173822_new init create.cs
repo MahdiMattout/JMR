@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JMR.Migrations
 {
-    public partial class Initial : Migration
+    public partial class newinitcreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -35,7 +35,8 @@ namespace JMR.Migrations
                     minPay = table.Column<int>(type: "INTEGER", nullable: false),
                     maxPay = table.Column<int>(type: "INTEGER", nullable: false),
                     timeFrame = table.Column<int>(type: "INTEGER", nullable: false),
-                    timeUnit = table.Column<string>(type: "TEXT", nullable: false)
+                    timeUnit = table.Column<string>(type: "TEXT", nullable: false),
+                    userId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -78,7 +79,8 @@ namespace JMR.Migrations
                     FName = table.Column<string>(type: "TEXT", nullable: false),
                     LName = table.Column<string>(type: "TEXT", nullable: false),
                     birthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CredentialId = table.Column<int>(type: "INTEGER", nullable: false)
+                    CredentialId = table.Column<int>(type: "INTEGER", nullable: false),
+                    phoneNumber = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -104,6 +106,26 @@ namespace JMR.Migrations
                 table: "RequiredSkills",
                 columns: new[] { "Id", "skillName" },
                 values: new object[] { 4, "C#" });
+
+            migrationBuilder.InsertData(
+                table: "RequiredSkills",
+                columns: new[] { "Id", "skillName" },
+                values: new object[] { 5, "HTML" });
+
+            migrationBuilder.InsertData(
+                table: "RequiredSkills",
+                columns: new[] { "Id", "skillName" },
+                values: new object[] { 6, "Java" });
+
+            migrationBuilder.InsertData(
+                table: "RequiredSkills",
+                columns: new[] { "Id", "skillName" },
+                values: new object[] { 7, "Javascript" });
+
+            migrationBuilder.InsertData(
+                table: "RequiredSkills",
+                columns: new[] { "Id", "skillName" },
+                values: new object[] { 8, "CSS" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_credentials_Email",

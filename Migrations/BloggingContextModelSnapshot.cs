@@ -63,6 +63,9 @@ namespace JMR.Migrations
                     b.Property<DateTime>("birthDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("phoneNumber")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("userId");
 
                     b.ToTable("Users");
@@ -94,6 +97,9 @@ namespace JMR.Migrations
                     b.Property<string>("timeUnit")
                         .IsRequired()
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("userId")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -150,6 +156,26 @@ namespace JMR.Migrations
                         {
                             Id = 4,
                             skillName = "C#"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            skillName = "HTML"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            skillName = "Java"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            skillName = "Javascript"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            skillName = "CSS"
                         });
                 });
 #pragma warning restore 612, 618

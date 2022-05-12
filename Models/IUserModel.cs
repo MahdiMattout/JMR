@@ -20,5 +20,7 @@ public class IUser
   public DateTime birthDate{get;set;}
   [ForeignKey("credentialId")]
   public int CredentialId{get;set;}
+  
+  public string? phoneNumber{get;set;}
 
 }
