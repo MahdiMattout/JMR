@@ -1,5 +1,6 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -15,35 +16,62 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/JMR.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css"
+        integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/custom.css" />
     <style>
-        .navLink:active{
-            color:green;
+        .navLink:active {
+            color: green;
             border-bottom: solid 2px;
             border-bottom-color: green;
         }
+
+        .wordContainer {
+            position: relative;
+            right: 50px;
+            width: 50px;
+            margin: 0px 50px;
+            bottom: 5px;
+        }
+
+        .top {
+            position: absolute;
+            top: 0px;
+        }
+
+        .down {
+            position: absolute;
+            top: 20px;
+        }
     </style>
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 justify-content-between">
+        <nav
+            class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 justify-content-between pb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Code Hunter</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand special" asp-area="" asp-controller="Home" asp-action="Index"><span class="wordContainer"><span class="top">Coder</span> <span
+                        style="color : #59AC59" class="down">Hunter</span></span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <form class="form-inline" method="get" asp-action="Index" asp-controller="Home">
-                    <input class="form-control mr-sm-2" type="search" name="SearchString" placeholder="Search" aria-label="Search by Title">
+                    <input class="form-control mr-sm-2" type="search" name="SearchString" placeholder="Search"
+                        aria-label="Search by Title">
                     <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Filter" />
                 </form>
                 <div class="navbar-collapse collapse d-flex flex-row justify-content-end">
-                    <a class="nav-link text-dark navLink" asp-area="" asp-controller="Home" asp-action="Index">Explore</a>
-                    <a class="nav-link navLink" asp-area="" asp-controller="Home" asp-action="Create">Create</a></div>
-                    <button class="btn btn-light">
-                        <a class="nav-link" asp-area="" asp-controller="UserAccount" asp-action="UserProfile">@ViewBag.Intials</a>
-                    </button>
+                    <a class="nav-link text-dark navLink" asp-area="" asp-controller="Home"
+                        asp-action="Index">Explore</a>
+                    <a class="nav-link navLink" asp-area="" asp-controller="Home" asp-action="Create">Create</a>
                 </div>
+                <button class="btn btn-light">
+                    <a class="nav-link" asp-area="" asp-controller="UserAccount"
+                        asp-action="UserProfile">@ViewBag.Intials</a>
+                </button>
+            </div>
             </div>
         </nav>
     </header>
@@ -63,4 +91,5 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
 </html>

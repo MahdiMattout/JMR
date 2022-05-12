@@ -16,19 +16,38 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/JMR.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/css/custom.css" />
     <style>
         .navLink:active{
             color:green;
             border-bottom: solid 2px;
             border-bottom-color: green;
         }
+        .wordContainer {
+            position: relative;
+            right: 50px;
+            width: 50px;
+            margin: 0px 50px;
+            bottom: 5px;
+        }
+
+        .top {
+            position: absolute;
+            top: 0px;
+        }
+
+        .down {
+            position: absolute;
+            top: 20px;
+        }
     </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 justify-content-between">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 justify-content-between pb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Code Hunter</a>
+                <a class="navbar-brand special" asp-area="" asp-controller="Home" asp-action="Index"><span class="wordContainer"><span class="top">Coder</span> <span
+                        style="color : #59AC59" class="down">Hunter</span></span></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
