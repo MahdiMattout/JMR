@@ -17,7 +17,7 @@ public class HomeController : Controller
       var credentialId = db.credentials.Single(c => c.Email == AuthHelpers.getUserEmail(HttpContext)).Id;
       var User = db.Users.Single(user => user.CredentialId == credentialId);
       ViewBag.Posts = db.Posts.ToList();
-      ViewBag.Intials = User.getUserInitials();
+      ViewBag.Initials = User.getUserInitials();
     }
     return View();
     }
@@ -25,21 +25,31 @@ public class HomeController : Controller
     [HttpGet]
     public IActionResult Index(string searchString){
       IEnumerable<Post> posts;
-      using (var db = new BloggingContext()) { posts = db.Posts.ToList(); }
-        if (!string.IsNullOrEmpty(searchString)){
-          posts = posts.Where(p => p.Title!.Contains(searchString));
-        }
-        else{
-        RedirectToAction("Index");
-        }
-        ViewBag.Posts = posts;
-        return View();
+      using (var db = new BloggingContext()) { 
+      posts = db.Posts.ToList();
+      var userId = AuthHelpers.getUserId(HttpContext);
+      ViewBag.Initials = db.Users.Find(userId).getUserInitials();
+      }
+      if (!string.IsNullOrEmpty(searchString)){
+        posts = posts.Where(p => p.Title!.Contains(searchString));
+      }
+      else{
+      RedirectToAction("Index");
+      }
+      ViewBag.Posts = posts;
+      return View();
     } 
+    [Authorize]
     [HttpGet]
     public IActionResult Create()
     {
-        ViewBag.RequiredSkills = new RequiredSkill().getAllRequiredSkills();
-        return View();
+      ViewBag.RequiredSkills = new RequiredSkill().getAllRequiredSkills();
+    using (var db = new BloggingContext())
+    {
+      var userId = AuthHelpers.getUserId(HttpContext);
+      ViewBag.Initials = db.Users.Find(userId).getUserInitials();
+    }
+    return View();
     }
 
     [HttpPost]
@@ -88,7 +98,7 @@ public class HomeController : Controller
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
     public IActionResult Error()
     {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+      return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 
     [HttpPost]
@@ -98,5 +108,15 @@ public class HomeController : Controller
         db.SaveChanges();
     }
     return RedirectToAction("Index");
+  }
+  [Authorize]
+  public IActionResult MyPosts(){
+    using (var db = new BloggingContext())
+    {
+      var userId = AuthHelpers.getUserId(HttpContext);
+      ViewBag.Initials = db.Users.Find(userId).getUserInitials();
+      ViewBag.myPosts = db.Posts.Where(p => p.userId == AuthHelpers.getUserId(HttpContext)).ToList();
+    }
+    return View();
   }
 }

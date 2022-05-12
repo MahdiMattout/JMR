@@ -17,6 +17,7 @@ public class UserAccountController : Controller
       ViewBag.Fname = User.FName;
       ViewBag.Lname = User.LName;
       ViewBag.Email = AuthHelpers.getUserEmail(HttpContext);
+      ViewBag.Initials = User.getUserInitials();
     }
     return View();
   }
