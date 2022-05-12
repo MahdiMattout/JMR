@@ -14,10 +14,9 @@ public class HomeController : Controller
 
     using (var db = new BloggingContext())
     {
-      var credentialId = db.credentials.Single(c => c.Email == AuthHelpers.getUserEmail(HttpContext)).Id;
-      var User = db.Users.Single(user => user.CredentialId == credentialId);
+      var user = db.Users.Find(AuthHelpers.getUserId(HttpContext));
       ViewBag.Posts = db.Posts.ToList();
-      ViewBag.Initials = User.getUserInitials();
+      ViewBag.Initials = user.getUserInitials();
     }
     return View();
     }
