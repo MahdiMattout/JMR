@@ -45,7 +45,7 @@
               @for (int i = 0; i < len / 2 + len % 2; i++)
               { 
                 <div class="form-check-inline d-block mb-3">
-                  <input asp-for="@Model.skillsIds[i]" name="skill" class="form-check-input" type="checkbox" id="@ViewBag.RequiredSkills[i].Id" value="@ViewBag.RequiredSkills[i].Id">
+                  <input asp-for="@Model.skillsIds[i]" class="form-check-input" type="checkbox" id="@ViewBag.RequiredSkills[i].Id" value="@ViewBag.RequiredSkills[i].Id">
                   <input asp-for="@Model.skillsIds[i]" type="hidden" value="false">
                   <label asp-for="@Model.skillsIds[i]"  class="form-check-label" for="gridCheck">
                       @ViewBag.RequiredSkills[i].skillName
@@ -57,7 +57,7 @@
               @for (int i = len / 2 + len % 2; i < len ; i++)
               { 
                 <div class="form-check-inline d-block mb-3">
-                  <input asp-for="@Model.skillsIds[i]" name="skill" class="form-check-input" type="checkbox" id="@ViewBag.RequiredSkills[i].Id" value="@ViewBag.RequiredSkills[i].Id">
+                  <input asp-for="@Model.skillsIds[i]" class="form-check-input" type="checkbox" id="@ViewBag.RequiredSkills[i].Id" value="@ViewBag.RequiredSkills[i].Id">
                   <input asp-for="@Model.skillsIds[i]" type="hidden" value="false">
                   <label asp-for="@Model.skillsIds[i]"  class="form-check-label" for="gridCheck">
                       @ViewBag.RequiredSkills[i].skillName
