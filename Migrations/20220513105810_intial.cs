@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace JMR.Migrations
 {
-    public partial class newinitcreate : Migration
+    public partial class intial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -79,8 +79,7 @@ namespace JMR.Migrations
                     FName = table.Column<string>(type: "TEXT", nullable: false),
                     LName = table.Column<string>(type: "TEXT", nullable: false),
                     birthDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CredentialId = table.Column<int>(type: "INTEGER", nullable: false),
-                    phoneNumber = table.Column<string>(type: "TEXT", nullable: true)
+                    CredentialId = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
