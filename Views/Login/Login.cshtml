@@ -8,9 +8,30 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
     integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="~/css/custom.css" />
+  <style>
+    .wordContainer {
+            position: relative;
+            right: 50px;
+            width: 50px;
+            margin: 0px 50px;
+            bottom: 5px;
+        }
+
+        .top {
+            position: absolute;
+            top: 0px;
+        }
+
+        .down {
+            position: absolute;
+            top: 20px;
+        }
+  </style>
 </head>
-<div class="split1 left">
+<div class="split1 left" style="position: absolute;">
   <div class="centered">
+    <div class="special" style="margin-bottom: 70px;"><span class="wordContainer"><span class="top">Coder</span> <span style="color : #59AC59" class="down">Hunter</span></span></div>
     <h1 class="special" style="font-size: 60px">Login</h1>
     <p>Login with your data.</p>
     <form asp-action="submitLogin" method="post" style="margin-top: 100px;">
