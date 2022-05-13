@@ -2,7 +2,25 @@
 @{
   Layout = null;
 }
+<style>
+  .wordContainer {
+    position: relative;
+    right: 50px;
+    width: 50px;
+    margin: 0px 50px;
+    bottom: 5px;
+    }
 
+    .top {
+      position: absolute;
+      top: 0px;
+    }
+
+    .down {
+      position: absolute;
+      top: 20px;
+    }
+</style>
 <head>
   <link rel="stylesheet" href="~/css/custom.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
@@ -11,6 +29,7 @@
 </head>
 <div class="split1 left">
   <div class="centered">
+    <div class="special" style="margin-bottom: 70px;"><span class="wordContainer"><span class="top">Coder</span> <span style="color : #59AC59" class="down">Hunter</span></span></div>
     <h1 class="special" style="font-size: 60px">Signup</h1>
     <p>Signup with your data.</p>
     <form asp-action="submitSignUp" method="post" style="margin-top: 100px;">
