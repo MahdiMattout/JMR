@@ -10,16 +10,16 @@ namespace JMR.Models
     public class Credentials
     {
         [Required]
-        public string? Email{get;set;}
+        public string Email{get;set;}
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id{get;set;}
 
         [Required]
-        public string? Hashedpassword{get; set;}
+        public string Hashedpassword{get; set;}
         [Required]
-        public string? passwordSalt{get;set;}
+        public string passwordSalt{get;set;}
     }
 }
 
