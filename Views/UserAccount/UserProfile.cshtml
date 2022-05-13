@@ -25,9 +25,9 @@
   </style>
 </head>
 
-<div class="d-flex container justify-content-start">
+<div class="d-flex container justify-content-center">
   <div class="mr-3 col-md-6 col-xl-4">
-    <h3>Settings</h3>
+    <h4>Settings</h4>
     <div style="margin-bottom: 28px;">
       <a asp-action="UserProfile"><div class="d-flex profileBtn">
         <div style="padding: 16px; padding-right: 12px">
@@ -56,9 +56,9 @@
     </div>
   </div>
   <div class=" row ml-3" style="height:100%;">
-    <h3>Account</h3>
+    <h4>Account</h4>
     <div class="d-inline-block p-3" style="border:solid 1px #EDEEF2; max-width:100%; height:100%; width:100%; border-radius:12px">
-      <h4 class="mb-5 pb-5">Personal Information</h4>
+      <h5 class="mb-5 pb-5">Personal Information</h5>
     <form class="form-group" method="post" asp-action="SaveChanges">
       <div class="row">
       <div class="col">
@@ -70,7 +70,7 @@
         <input type="text" class="form-control" asp-for="Lname" style="border-radius:6px;" placeholder="Last name" value="@ViewBag.Lname">
       </div>
     </div>
-    <div class="form-row">
+    <div class="form-row mt-5">
       <div class="form-group col-sm-12">
         <label for="inputEmail4">Email</label>
         <input readonly type="email" class="form-control" style="border-radius:6px;" id="inputEmail4" placeholder="Email" value="@ViewBag.Email">
@@ -80,8 +80,7 @@
         <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
       </div> *@
     </div>
-    <hr/>
-    <div class="d-flex flex-row-reverse">
+    <div class="d-flex flex-row-reverse" style="margin-top: 100px; border-top: 1px solid #EDEEF2; padding-top: 30px;">
     <button type="submit" asp-controller="UserAccount" asp-action="SaveChanges" class="btn btn-success ml-3" style="border-radius:12px">Save Changes</button>
     <button type="reset" class="btn" style="color: #83859C; border: 1px solid #83859C;border-radius:12px">Discard Changes</button>
     </div>

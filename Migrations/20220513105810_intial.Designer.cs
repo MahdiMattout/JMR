@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JMR.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20220512221606_intialMig")]
-    partial class intialMig
+    [Migration("20220513105810_intial")]
+    partial class intial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -64,9 +64,6 @@ namespace JMR.Migrations
 
                     b.Property<DateTime>("birthDate")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("phoneNumber")
-                        .HasColumnType("TEXT");
 
                     b.HasKey("userId");
 

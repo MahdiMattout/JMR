@@ -63,9 +63,6 @@ namespace JMR.Migrations
                     b.Property<DateTime>("birthDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("phoneNumber")
-                        .HasColumnType("TEXT");
-
                     b.HasKey("userId");
 
                     b.ToTable("Users");

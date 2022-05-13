@@ -24,7 +24,7 @@ public class BloggingContext : DbContext
       new RequiredSkill { Id = 6, skillName = "Java"},
       new RequiredSkill { Id = 7, skillName = "Javascript"},
       new RequiredSkill { Id = 8, skillName = "CSS"}
-    );
+  );
   }
     public BloggingContext()
     {
