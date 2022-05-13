@@ -25,8 +25,15 @@ public class UserAccountController : Controller
     HttpContext.Session.Clear();
     return RedirectToAction("SignUp","Login");
   }
+  [Authorize]
   [HttpPost]
   public IActionResult SaveChanges(UserViewModel user){
+    using (var db = new BloggingContext()){
+      var User = db.Users.Find(AuthHelpers.getUserId(HttpContext));
+      User.FName = user.Fname;
+      User.LName = user.Lname;
+      db.SaveChanges();
+    }
     return RedirectToAction("UserProfile");
   }
 }
