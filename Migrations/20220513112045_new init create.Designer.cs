@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace JMR.Migrations
 {
     [DbContext(typeof(BloggingContext))]
-    [Migration("20220513105810_intial")]
-    partial class intial
+    [Migration("20220513112045_new init create")]
+    partial class newinitcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
