@@ -16,8 +16,8 @@
     }
 
     .form-check-input:checked {
-      background-color: #59AC59;
-      border-color: #59AC59;
+      background-color: #59AC89;
+      border-color: #59AC89;
       width: 20px;
       height: 20px;
     }
@@ -35,27 +35,30 @@
       word-wrap: break-word;
     }
     .modal-footer{
-      border-top: 1px solid #59AC59;
+      border-top: 1px solid #59AC89;
+    }
+    .custom-card {
+      border: 2px solid #59AC89;
     }
   </style>
 </head>
 <div class="container-fluid px-0 w-100" style="width: 100%;">
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-4" style="width: 100%;">
-    @if(ViewBag.myPosts.Count == 0){<h3 class="w-100">You do not have any posts! Create one now!</h3>}
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 row-cols-lg-3 row-cols-xl-3" style="width: 100%;">
+    @if(ViewBag.myPosts.Count == 0){<h3 class="w-100">You don't have any posts. Create one now!</h3>}
     @foreach (var post in ViewBag.myPosts)
     {
       <div class="col mb-4" style=" min-width: 25rem; max-width: 30rem;">
         <button class="btn w-100" data-toggle="modal" data-target="@String.Format("#exampleModalLong{0}",post.Id)">
-          <div class="card border-success">
-            <div class="card-body">
-              <h5 class="card-title text-left" style="font-size:1.6rem">@post.Title</h5>
-              <hr />
-              <div class="d-inline">
+          <div class="card custom-card">
+            <div class="card-body text-left">
+              <h5 class="card-title" style="font-size:1.6rem">@post.Title</h5>
+              <hr class="mt-4 mb-4"/>
+              <div class="d-inline text-secondary">
                 <i class="fas fa-clock"></i> @post.timeFrame @post.timeUnit &bull; @post.priceRange()
               </div>
             </div>
             <div
-            style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; padding: 0 12px;">
+            style="display: flex; font-size:14px; flex-wrap: wrap; justify-content: flex-start; align-items: flex-start; padding: 0 12px; margin-top: 10px;">
               @foreach (var skill in post.extractSkills())
               {
                 string icon = "";
@@ -94,7 +97,7 @@
                 {
                   icon = "fa-brands fa-css3-alt";
                 }
-                <i style="background-color: #EDEEF2; padding: 4px 12px; border-radius : 10px; margin-bottom: 8px;"
+                <i style="background-color: #EDEEF2; padding: 4px 12px; border-radius : 10px; margin-bottom: 8px; margin-right: 10px;"
               class="@icon">@text</i>
               }
             </div>
