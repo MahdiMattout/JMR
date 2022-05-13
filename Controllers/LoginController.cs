@@ -35,7 +35,11 @@ namespace JMR.Controllers
         string salt = "";
         string DbHashedPassword = "";
         using(var db = new BloggingContext()){
-            var credential = db.credentials.Single(c => c.Email == LoginModel.Email);
+            var credential = db.credentials.SingleOrDefault(c => c.Email == LoginModel.Email);
+            if (credential == null){
+                ViewBag.Alert = "Email doesn't exist";
+                return View("Login");
+            }
             salt = credential.passwordSalt;
             DbHashedPassword = credential.Hashedpassword;
         }
