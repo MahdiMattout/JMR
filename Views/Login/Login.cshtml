@@ -18,6 +18,7 @@
         <label asp-for="Email" class="form-label">Email</label></br>
         <input required asp-for="Email" class="form-control" type="email" id="Email" name="Email"
           placeholder="name@example.com"></br>
+          <div style="color: red; display: none; text-align: center;" id="errorMsg2">This email doesn't exist!</div></br>
         <label asp-for="Password" class="form-label">Password</label></br>
         <input required style="display: inline;" asp-for="Password" class="form-control mb-3" type="password" id="Password"
           name="Password" placeholder="min. 8 characters"><i style="display: inline;" class="bi bi-eye-slash"
@@ -33,6 +34,15 @@
     </form>
   </div>
 </div>
+
+@if (ViewBag.Alert != null)
+{
+  <script type="text/javascript">
+    window.onload = function () {
+      document.querySelector("#errorMsg2").style.display="block";
+    };  
+  </script>
+}
 
 <div class="split2 right">
   <div class="right-subtitle" style="text-align: right;">
