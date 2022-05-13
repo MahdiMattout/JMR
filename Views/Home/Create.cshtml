@@ -5,8 +5,8 @@
 
 <style>
   .form-check-input:checked {
-    background-color: #59AC59;
-    border-color: #59AC59;
+    background-color: #59AC89;
+    border-color: #59AC89;
     width: 20px;
     height: 20px;
   }
@@ -83,11 +83,11 @@
 
       <div class="row form-group mb-5">
         <div class="col">
-          <label asp-for="minPay">Minimum Salary</label>
+          <label asp-for="minPay">Minimum Salary (in $)</label>
           <input required type="number" min="0" class="form-control" id="minPay" name="minPay" style="border: 1px solid #AAAAAA; border-radius: 8px;">
         </div>
         <div class="col">
-          <label asp-for="maxPay">Maximum Salary</label>
+          <label asp-for="maxPay">Maximum Salary (in $)</label>
           <input required type="number" min="0" class="form-control" id="maxPay" name="maxPay" style="border: 1px solid #AAAAAA; border-radius: 8px;">
         </div>
       </div>
