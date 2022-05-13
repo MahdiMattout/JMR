@@ -25,4 +25,8 @@ public class UserAccountController : Controller
     HttpContext.Session.Clear();
     return RedirectToAction("SignUp","Login");
   }
+  [HttpPost]
+  public IActionResult SaveChanges(UserViewModel user){
+    return RedirectToAction("UserProfile");
+  }
 }
